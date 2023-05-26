@@ -1,0 +1,10 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Back end for the current project",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Nuxnuxx and ES0TERIK",
+  "license": "MIT"
+}
