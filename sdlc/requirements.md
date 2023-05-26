@@ -2,40 +2,62 @@
 
 # Functional requirements 
    ## user registration and authentication
-    - connexion
-    - inscription
+    - User Login
+    - User Registration
 
   ## Product listing and categorization
-    - product listing
-      - category
+    - Display Products
+      - Product Categorization
 
   ## Shopping cart 
-    - add and delete in the cart
-    - checkout (no payement only put in database)
+    - Add and Remove Products in the Cart
+    - Checkout Process (Record in database, no payment processing)
 
 # Non Functional requirements
 
 ## Performance
-        SSR
-        caching database query
+        Server-Side Rendering (SSR)
+        Database Query Caching
 
 ## Security
-        HTTPS
-        hash password
-        sanitize input for api
-        JWT for auth 
+        HTTPS protocol
+        Password Hashing
+        Input Sanitization for API
+        JSON Web Token (JWT) for Authentication 
 
 ## Usability
-        mobile first 
+        Mobile-first Design
 
 ## Maintainability
-        git version control
-        commentary
-        prettier
-        eslint
-        typescript
-        test (front / back)
-        documentation api / front ????
-        error handling
+        Git Version Control
+        Code Documentation
+        Code Formatting with Prettier
+        Code Linting with ESLint
+        TypeScript Implementation
+        Testing (Front-end / Back-end)
+        API Documentation
+        Error Handling Mechanism
 
 # Week 2
+
+# Functional requirements 
+  ## User profile management
+    - User page display and update functionnality
+
+  ## Product discovery
+    - Advanced product search functionnality
+ 
+  ## Payment Processing
+    - Payment Method registration
+    - Payment confirmation process
+
+# Non Functional requirements
+
+
+# Week 3
+
+# Functional requirements 
+  
+  ## ChatBot Integration
+
+# Non Functional requirements
