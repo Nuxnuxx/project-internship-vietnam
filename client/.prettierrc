@@ -6,6 +6,7 @@
   "useTabs": false,
   "arrowParens": "always",
   "printWidth": 80,
+  "jsxSingleQuote": true,
   "endOfLine": "auto"
 }
 
