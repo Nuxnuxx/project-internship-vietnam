@@ -1,4 +1,4 @@
-# Week 1
+# Sprint 1
 
 # Functional requirements 
    ## user registration and authentication
@@ -38,7 +38,7 @@
         API Documentation
         Error Handling Mechanism
 
-# Week 2
+# Sprint 2
 
 # Functional requirements 
   ## User profile management
@@ -54,10 +54,17 @@
 # Non Functional requirements
 
 
-# Week 3
+# Sprint 3
 
 # Functional requirements 
   
-  ## ChatBot Integration
+  ## Automated customer service
+    - Chatbot for automated response
+
+  ## User Financial Management ( digital wallet )
+    - Digital Wallet Setup
+    - Enable Fund Deposits and Withdrawals in Wallet
+    - Facilitate Money Transfers From Bank Account or PayPal
+    - Display Digital Wallet Transaction History
 
 # Non Functional requirements
