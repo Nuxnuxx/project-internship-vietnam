@@ -140,9 +140,9 @@
         Middleware :
             - protect
             - userSameToken
-            - email exist and is an email
-            - username exist and is a string
-            - password exist and is strong (8 character, 1 uppercase, 1 symbol)
+            - email optional and is an email
+            - username optional and is a string
+            - password optional and is strong (8 character, 1 uppercase, 1 symbol)
             - handleInputErrors
         Response: { "id": "", "email": "", "username": "", "createdAt": "" }
 
