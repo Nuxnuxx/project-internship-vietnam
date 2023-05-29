@@ -11,6 +11,12 @@
     - initiate simple middleware (logging, only json, url encoded) DONE
     - create folder structure for (handlers, router, module and database) DONE
 
+
+## global middleware 
+
+    - protect (authentification)
+    - handleInputError DONE
+
 ## User Router
 
     - declare router endpoint DONE
@@ -20,3 +26,5 @@
         - update DONE
         - delete DONE
     - middleware
+        - built in middleware DONE
+        - custom middleware for object id
