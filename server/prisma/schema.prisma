@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  email     String     @unique
+  username  String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  cart      CartItem[]
+  orders    Order[]
+}
+
+model Product {
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  description     String
+  price           Float
+  imageUrl        String
+  category        CATEGORY
+  quantityInStock Int
+  createdAt       DateTime    @default(now())
+  CartItem        CartItem[]
+  OrderItem       OrderItem[]
+}
+
+enum CATEGORY {
+  CATEGORY1
+  CATEGORY2
+  CATEGORY3
+  CATEGORY4
+}
+
+model CartItem {
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String
+  user            User    @relation(fields: [userId], references: [id])
+  productId       String
+  product         Product @relation(fields: [productId], references: [id])
+  priceAtThisTime Float
+  quantity        Int
+}
+
+enum ORDER_STATUS {
+  PLACED
+  SHIPPED
+  DELIVERED
+}
+
+model Order {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  totalCost   Float
+  orderStatus ORDER_STATUS @default(PLACED)
+  createdAt   DateTime     @default(now())
+  items       OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+}
