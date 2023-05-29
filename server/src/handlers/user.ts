@@ -36,7 +36,6 @@ export const login = async (req, res, next) => {
     })
 
     const isValid = await comparePasswords(req.body.password, user.password)
-    console.log(user, isValid)
 
     if (!isValid) {
       res.status(401)
