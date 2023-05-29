@@ -1,8 +1,9 @@
 # TODO
 
 ## Setup 
-    - Setup typscript
-    - Setup prettier and eslint
+    - Setup typscript DONE
+    - Setup prettier DONE
+    - Setup eslint
     - Setup database and prisma
     - Setup config for dev | test | prod
 
