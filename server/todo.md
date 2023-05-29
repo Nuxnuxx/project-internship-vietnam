@@ -27,4 +27,4 @@
         - delete DONE
     - middleware
         - built in middleware DONE
-        - custom middleware for object id
+        - query middleware DONE

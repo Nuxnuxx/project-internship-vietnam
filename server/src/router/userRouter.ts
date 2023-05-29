@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { changeUser, deleteUser, getUser, login, register } from "../handlers/user";
-import { body } from "express-validator";
+import { body, query } from "express-validator";
 import passwordOptions from "../utils/passwordStrongOption";
 import { handleInputErrors } from "../modules/middleware";
 
@@ -20,9 +20,12 @@ userRouter.post('/login',
   login
 )
 userRouter.get('/get/:id',
+  query('id').exists().isMongoId(),
+  handleInputErrors,
   getUser
 )
 userRouter.put('/put/:id',
+  query('id').exists().isMongoId(),
   body('email').optional().isEmail(),
   body('username').optional().isString(),
   body('password').optional().isStrongPassword(passwordOptions),
@@ -30,6 +33,8 @@ userRouter.put('/put/:id',
   changeUser
 )
 userRouter.delete('/delete/:id',
+  query('id').exists().isMongoId(),
+  handleInputErrors,
   deleteUser
 )
 
