@@ -1,13 +1,14 @@
 import { QueryFunction } from "@tanstack/react-query";
 
 type Form = {
-    email: string;
-    password: string;
+    value: {
+        email: string;
+        password: string;
+    }
 }
 
-
 const fetchLogin: QueryFunction<string, ["form", Form]> = async ({ queryKey }) => {
-    const { email, password } = queryKey[1];
+    const { email, password } = queryKey[1].value;
 
     if (!email || !password) {
         throw new Error(`error in form`);
