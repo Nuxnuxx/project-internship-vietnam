@@ -42,7 +42,7 @@
     - verify the token if good token pass the user id that we get from the token to the request params and next
     - if false token return 401
 
-### userSameToken
+### userSameToken (DEPRECATED)
     - verify if the id of the query is the same as the id in the token
     if no return 401
     else next
@@ -140,9 +140,9 @@
         Middleware :
             - protect
             - userSameToken
-            - email exist and is an email
-            - username exist and is a string
-            - password exist and is strong (8 character, 1 uppercase, 1 symbol)
+            - email optional and is an email
+            - username optional and is a string
+            - password optional and is strong (8 character, 1 uppercase, 1 symbol)
             - handleInputErrors
         Response: { "id": "", "email": "", "username": "", "createdAt": "" }
 
