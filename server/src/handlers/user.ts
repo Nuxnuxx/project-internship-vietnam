@@ -19,7 +19,7 @@ export const register = async (req, res, next) => {
       },
     })
 
-    const token = createJWT(user)
+    const token = createJWT(user.id)
     res.json({ token })
   } catch (error) {
     error.type = 'input'
