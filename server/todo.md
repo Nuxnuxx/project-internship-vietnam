@@ -14,7 +14,7 @@
 
 ## global middleware 
 
-    - protect (authentification)
+    - protect DONE
     - handleInputError DONE
 
 ## User Router
@@ -27,4 +27,5 @@
         - delete DONE
     - middleware
         - built in middleware DONE
-        - query middleware DONE
+        - params middleware DONE
+        - userSameToken

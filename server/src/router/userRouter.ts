@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { changeUser, deleteUser, getUser, login, register } from "../handlers/user";
-import { body, query } from "express-validator";
+import { body, param } from "express-validator";
 import passwordOptions from "../utils/passwordStrongOption";
 import { handleInputErrors } from "../modules/middleware";
+import { protect } from "../modules/authentification";
 
 const userRouter = Router()
 
@@ -19,13 +20,16 @@ userRouter.post('/login',
   handleInputErrors,
   login
 )
+
+userRouter.use(protect)
+
 userRouter.get('/get/:id',
-  query('id').exists().isMongoId(),
+  param('id').exists().isMongoId(),
   handleInputErrors,
   getUser
 )
 userRouter.put('/put/:id',
-  query('id').exists().isMongoId(),
+  param('id').exists().isMongoId(),
   body('email').optional().isEmail(),
   body('username').optional().isString(),
   body('password').optional().isStrongPassword(passwordOptions),
@@ -33,11 +37,9 @@ userRouter.put('/put/:id',
   changeUser
 )
 userRouter.delete('/delete/:id',
-  query('id').exists().isMongoId(),
+  param('id').exists().isMongoId(),
   handleInputErrors,
   deleteUser
 )
-
-
 
 export default userRouter
