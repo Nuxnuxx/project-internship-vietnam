@@ -16,7 +16,7 @@
         Dalle 
         Footer
 
-    Catalogue
+    Catalogue (/products)
         Search Module
             List Categorie
             SearchI(ui)
@@ -24,13 +24,23 @@
         List Product
             .map
              
-    Details Product
+    Details Product(/products/:id
         Add Product
         
-   Shopping Cart
+   Shopping Cart(/carts/:userId)
         Product Cart 
         Cart Info 
 
-    Register
+    Register(/user/register)
         
-    SignIn
+    SignIn (/user/login)
+    
+
+- Package
+## react-router-dom
+## @tanstack/react-query
+## react-redux
+
+
+
+
