@@ -14,6 +14,7 @@
 ## prisma (ORM for mongodb and other database)
 ## dotenv (access environment variable)
 ## jest (testing)
+## supertest (HTTP assertions)
 
 - Router 
 
@@ -41,6 +42,11 @@
     - verify the token if good token pass the user id that we get from the token to the request params and next
     - if false token return 401
 
+### userSameToken
+    - verify if the id of the query is the same as the id in the token
+    if no return 401
+    else next
+
 ## body sanitize input
     - use of express validator package
     - custom sanitizer for verifiying if id is objectId (use of mongo + express validator package)
@@ -60,9 +66,12 @@
     - server fault
         - 500 opps on us
 
-- API endpoint
+- user router
+    
+    - Middeware :
+        - userSameToken (for GET user/:id and PUT user/:id and DELETE user/:id)
 
-## Router User
+## User
 
 ### POST /user/register
     Allows a new user to register by providing their email, username, and password.
@@ -111,12 +120,17 @@
         if (!isValid)
             return 401 + "impossible to connect"
         
-        const token = createToken(user)
+        const token = createToken(user,
+        expire : 30day
+        )
         return token
 
 ### GET /user/:id
     Fetches the details of a specific user based on the user ID.
         Path parameters: { "id": "" } (User ID)
+        Middeware :
+            - protect
+            - userSameToken
         Response: { "id": "", "email": "", "username": "", "createdAt": "" }
 
 ### PUT /user/:id
@@ -124,6 +138,8 @@
         Path parameters: { "id": "" } (User ID)
         Request body: { "email": "", "username": "", "password": "" } (Optional, only the properties to be updated)
         Middleware :
+            - protect
+            - userSameToken
             - email exist and is an email
             - username exist and is a string
             - password exist and is strong (8 character, 1 uppercase, 1 symbol)
@@ -133,58 +149,63 @@
 ### DELETE /user/:id
     Deletes a specific user based on the user ID.
         Path parameters: { "id": "" } (User ID)
+        Middeware :
+            - protect
+            - userSameToken
         Response: { "message": "User deleted successfully." }
 
 - api router
 
     - Middeware : 
-        - protect
+        - protect (not for GET products, GET products/:id, GET products/category/:categoryId)
 
 ## Product
 
 ### POST /api/products
     Allows a new product to be added to the catalog.
-        Request body: { "name": "", "description": "", "price": "", "category": "", "quantityInStock": "" }
+        Request body: { "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "" }
         Middleware :
             - name exist and is a string
             - description exist and is a string
             - price exist and is a float
-            - category exist and is a numeric number 
+            - imageUrl exist and is a string
+            - category exist and is a string
             - quantityInStock exist and is a numeric number 
             - handleInputErrors
         Response: { "id": "", "name": "", "description": "", "price": "", "category": "", "quantityInStock": "", "createdAt": "" }
 
 ### GET /api/products
     Retrieve all the products.
-        Response: { "products": [{ "id": "", "name": "", "description": "", "price": "", "category": "", "quantityInStock": "", "createdAt": "" }, ...] }
+        Response: { "products": [{ "id": "", "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "", "createdAt": "" }, ...] }
         
 ### GET /api/products/:id
     Retrieve a specific product identified by the ID.
         Path parameters: { "id": "" } (Product ID)
-        Response: { "id": "", "name": "", "description": "", "price": "", "category": "", "quantityInStock": "", "createdAt": "" }
+        Response: { "id": "", "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "", "createdAt": "" }
 
 ### PUT /api/products/:id
     Update the details of a specific product identified by the ID.
         Path parameters: { "id": "" } (Product ID)
-        Request body: { "name": "", "description": "", "price": "", "category": "", "quantityInStock": "" } (Optional, only the properties to be updated)
+        Request body: { "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "" } (Optional, only the properties to be updated)
         Middleware :
             - name optional and is a string
             - description optional and is a string
             - price optional and is a float
-            - category optional and is a numeric number 
+            - imageUrl optional and is a float
+            - category optional and is a string
             - quantityInStock optional and is a numeric number 
             - handleInputErrors
-        Response: { "id": "", "name": "", "description": "", "price": "", "category": "", "quantityInStock": "", "createdAt": "" }
+        Response: { "id": "", "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "", "createdAt": "" }
 
 ### DELETE /api/products/:id
     Deletes a specific product identified by the ID.
         Path parameters: { "id": "" } (Product ID)
         Response: { "message": "Product deleted successfully." }
 
-### GET /api/products/category/:categoryId
+### GET /api/products/category/:categoryName
     Retrieves all the products belonging to a specific category.
-        Path parameters: { "categoryId": "" } (Category ID)
-        Response: { "products": [{ "id": "", "name": "", "description": "", "price": "", "category": "", "quantityInStock": "", "createdAt": "" }, ...] }
+        Path parameters: { "categoryName": "" } (Category Name)
+        Response: { "products": [{ "id": "", "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "", "createdAt": "" }, ...] }
 
 ## Cart
 

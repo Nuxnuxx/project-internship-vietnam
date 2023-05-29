@@ -15,6 +15,7 @@ model Product {
   name           String
   description    String
   price          Float
+  imageUrl       String
   category       CATEGORY
   quantityInStock Int
   createdAt      DateTime  @default(now())
@@ -34,12 +35,18 @@ model CartItem {
   quantity  Int
 }
 
+enum ORDER_STATUS {
+    PLACED,
+    SHIPPED,
+    DELIVERED
+}
+
 model Order {
   id         String     @id @default(auto()) @map("_id") @db.ObjectId
   userId     String
   user       User       @relation(fields: [userId], references: [id])
-  totalCost  Int
-  orderStatus String
+  totalCost  Float
+  orderStatus ORDER_STATUS @default("STARTED")
   createdAt  DateTime   @default(now())
   items      OrderItem[]
 }
