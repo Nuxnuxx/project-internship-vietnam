@@ -245,3 +245,100 @@
             - orderStatus exist and is one of PLACED, SHIPPED, DELIVERED
             - handleInputErrors
             Response: { "id": "", "createdAt": "", "userId": "", "totalCost": "", "orderStatus": "" }
+
+
+# Test Plan
+
+## Unit Testing
+
+### User Registration - POST /user/register
+        Test with all required parameters provided correctly.
+        Test with each parameter missing or invalid to ensure error handling is working properly.
+        Test with existing user data to make sure it handles duplicates correctly.
+
+### User Login - POST /user/login
+        Test with a valid email and password.
+        Test with invalid email or password.
+        Test with a non-existent user.
+
+### Get User Details - GET /user/:id
+        Test with a valid user id.
+        Test with an invalid or non-existent user id.
+
+### Update User Details - PUT /user/:id
+        Test with valid and invalid parameters.
+        Test with a non-existent user id.
+
+### Delete User - DELETE /user/:id
+        Test with a valid user id.
+        Test with a non-existent user id.
+
+### Add Product - POST /api/products
+        Test with all required parameters provided correctly.
+        Test with each parameter missing or invalid.
+
+### Get Products - GET /api/products
+        Test after adding several products to ensure all are being returned.
+
+### Get Specific Product - GET /api/products/:id
+        Test with a valid product id.
+        Test with a non-existent product id.
+
+### Update Product - PUT /api/products/:id
+        Test with valid and invalid parameters.
+        Test with a non-existent product id.
+
+### Delete Product - DELETE /api/products/:id
+        Test with a valid product id.
+        Test with a non-existent product id.
+
+### Create Cart - POST /api/carts
+        Test with all required parameters provided correctly.
+        Test with each parameter missing or invalid.
+
+### Get Cart - GET /api/carts/:userId
+        Test with a valid user id.
+        Test with a non-existent user id.
+
+### Update Cart - PUT /api/carts/:userId/:productId
+        Test with valid and invalid quantity.
+        Test with non-existent user id or product id.
+
+### Delete Product from Cart - DELETE /api/carts/:userId/:productId
+        Test with valid user id and product id.
+        Test with non-existent user id or product id.
+
+### Place Order - POST /api/orders
+        Test with a valid user id.
+        Test with a non-existent user id.
+
+### Get Orders - GET /api/orders/:userId
+        Test with a valid user id.
+        Test with a non-existent user id.
+
+### Get Specific Order - GET /api/orders/:orderId
+        Test with a valid order id.
+        Test with a non-existent order id.
+
+### Update Order Status - PUT /api/orders/:orderId
+        Test with valid order status.
+        Test with invalid order status.
+        Test with non-existent order id.
+
+## Integration Testing
+
+### User Registration and Login
+        Register a new user and use the returned token to authenticate a request to get the user's details.
+        Verify that the details returned match those provided during registration.
+
+### Product Creation and Retrieval
+        Create a new product and use its id to retrieve it. 
+        Verify that the details match those provided during creation.
+
+### Cart Creation and Management
+        Register a new user, create a new product, add the product to the user's cart.
+        then retrieve the cart and verify that it contains the correct product.
+
+### Order Placement and Retrieval
+        Register a new user, create a new product, add the product to the user's cart, place an order, 
+        then retrieve the order and verify that it contains the correct details.
