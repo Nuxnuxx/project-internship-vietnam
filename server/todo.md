@@ -8,5 +8,5 @@
 
 ## Server
     - initiate the server and install the necessary package for it DONE
-    - initiate simple middleware (logging, only json, url encoded)
+    - initiate simple middleware (logging, only json, url encoded) DONE
     - create folder structure for (handlers, router, module and database)
