@@ -39,3 +39,8 @@
     - middleware
         - built in middleware DONE
         - params middleware DONE
+
+## Carts routes
+
+    - declare endpoint DONE
+    - handler

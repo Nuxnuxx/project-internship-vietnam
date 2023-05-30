@@ -3,6 +3,8 @@ import { changeProduct, createProduct, deleteProduct, getProduct, getProductByCa
 import { body, param } from "express-validator";
 import { handleInputErrors } from "../modules/middleware";
 import category from "../utils/listCategory";
+import { createCart, getCart } from "../handlers/cart";
+import { protect } from "../modules/authentification";
 
 const apiRouter = Router()
 
@@ -27,7 +29,7 @@ apiRouter.get('/products/category/:categoryName',
   getProductByCategory
 )
 
-
+apiRouter.use(protect)
 
 // Those routes need admin status
 
@@ -65,16 +67,18 @@ apiRouter.delete('/products/:id',
 ///////////
 
 
-apiRouter.post('/carts',
+apiRouter.post('/cart',
+  createCart
 )
 
-apiRouter.get('/carts/user/:id',
+apiRouter.get('/cart',
+  getCart
 )
 
-apiRouter.put('/carts/:userId/:productId',
+apiRouter.put('/cart/:productId',
 )
 
-apiRouter.delete('/carts/:userId/:productId',
+apiRouter.delete('/cart',
 )
 
 export default apiRouter
