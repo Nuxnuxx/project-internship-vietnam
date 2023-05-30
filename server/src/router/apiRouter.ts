@@ -62,6 +62,7 @@ apiRouter.delete('/products/:id',
   deleteProduct
 )
 
+
 ///////////
 // CARTS //
 ///////////
@@ -91,8 +92,24 @@ apiRouter.delete('/cart',
 
 apiRouter.delete('/cart/:productId',
   param('productId').exists().isMongoId(),
-  handleInputErrors
+  handleInputErrors,
   deleteProductInCart
+)
+
+///////////
+// CARTS //
+///////////
+
+apiRouter.post('/orders',
+)
+
+apiRouter.get('/orders',
+)
+
+apiRouter.get('/orders/:orderId',
+)
+
+apiRouter.put('/orders/:orderId',
 )
 
 export default apiRouter

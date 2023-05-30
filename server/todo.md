@@ -47,3 +47,11 @@
     - middleware
         - built in middleware DONE
         - params middleware DONE
+
+## Order routes
+
+    - declare endpoint DONE
+    - handler
+    - middleware
+        - built in middleware
+        - params middleware
