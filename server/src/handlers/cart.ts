@@ -16,17 +16,36 @@ export const createCart = async (req, res, next) => {
       return res.status(404).json({ message: 'Product not found' })
     }
 
-    const cartItem = await prisma.cartItem.create({
-      data: {
+        // Check if the cart item already exists for this user and product
+    let cartItem = await prisma.cartItem.findFirst({
+      where: {
         userId: req.user.id,
         productId: product.id,
-        priceAtThisTime: product.price,
-        quantity: req.body.quantity,
       },
     })
 
-    if (!cartItem) {
-      return res.status(500).json({ message: 'Failed to create cart item' })
+    if (cartItem) {
+      // If cart item exists, update its quantity
+      cartItem = await prisma.cartItem.update({
+        where: {
+          id: cartItem.id,
+        },
+        data: {
+          quantity: {
+            increment: req.body.quantity,
+          },
+        },
+      })
+    } else {
+      // If cart item does not exist, create a new one
+      cartItem = await prisma.cartItem.create({
+        data: {
+          userId: req.user.id,
+          productId: product.id,
+          priceAtThisTime: product.price,
+          quantity: req.body.quantity,
+        },
+      })
     }
 
     const cart = await prisma.user.update({
@@ -60,7 +79,8 @@ export const getCart = async (req, res) => {
     },
   })
 
-  res.json({ cart })
+  const result = cart.cart
+  res.json({ result })
 }
 
 export const changeCart = async (req, res) => {
