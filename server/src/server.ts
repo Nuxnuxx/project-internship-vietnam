@@ -1,6 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import userRouter from './router/userRouter'
+import apiRouter from './router/apiRouter'
 
 
 const app = express()
@@ -10,6 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use('/user', userRouter)
+app.use('/api', apiRouter)
 
 app.use((err, req, res, next) => {
   if (err.type === 'auth'){

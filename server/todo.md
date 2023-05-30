@@ -35,3 +35,4 @@
 ## Product routes
     
     - declare endpoint DONE
+    - handler DONE
