@@ -22,6 +22,7 @@ export const register = async (req, res, next) => {
     const token = createJWT(user.id)
     res.json({ token })
   } catch (error) {
+    console.error(error)
     error.type = 'input'
     next(error)
   }
@@ -45,6 +46,7 @@ export const login = async (req, res, next) => {
     const token = createJWT(user.id)
     res.json({ token })
   } catch (error) {
+    console.error(error)
     error.type = 'input'
     next(error)
   }
@@ -60,6 +62,7 @@ export const getUser = async (req, res, next) => {
 
     res.json({ user })
   } catch (error) {
+    console.error(error)
     error.type = 'input'
     next(error)
   }
@@ -91,6 +94,7 @@ export const changeUser = async (req, res, next) => {
 
   res.json({ user })
   } catch (error) {
+    console.error(error)
     error.type = 'input'
     next(error)
   }

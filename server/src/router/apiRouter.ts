@@ -3,7 +3,7 @@ import { changeProduct, createProduct, deleteProduct, getProduct, getProductByCa
 import { body, param } from "express-validator";
 import { handleInputErrors } from "../modules/middleware";
 import category from "../utils/listCategory";
-import { createCart, getCart } from "../handlers/cart";
+import { changeCart, createCart, deleteCart, deleteProductInCart, getCart } from "../handlers/cart";
 import { protect } from "../modules/authentification";
 
 const apiRouter = Router()
@@ -76,9 +76,15 @@ apiRouter.get('/cart',
 )
 
 apiRouter.put('/cart/:productId',
+  changeCart
 )
 
 apiRouter.delete('/cart',
+  deleteCart
+)
+
+apiRouter.delete('/cart/:productId',
+  deleteProductInCart
 )
 
 export default apiRouter
