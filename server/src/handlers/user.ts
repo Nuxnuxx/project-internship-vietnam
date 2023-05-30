@@ -70,29 +70,29 @@ export const getUser = async (req, res, next) => {
 
 export const changeUser = async (req, res, next) => {
   try {
-  const { email, username, password } = req.body
-  const updateData: Partial<User> = {}
+    const { email, username, password } = req.body
+    const updateData: Partial<User> = {}
 
-  if (email) {
-    updateData.email = email
-  }
+    if (email) {
+      updateData.email = email
+    }
 
-  if (username) {
-    updateData.username = username
-  }
+    if (username) {
+      updateData.username = username
+    }
 
-  if (password) {
-    updateData.password = password
-  }
+    if (password) {
+      updateData.password = password
+    }
 
-  const user = await prisma.user.update({
-    where: {
-      id: req.user.id,
-    },
-    data: updateData,
-  })
+    const user = await prisma.user.update({
+      where: {
+        id: req.user.id,
+      },
+      data: updateData,
+    })
 
-  res.json({ user })
+    res.json({ user })
   } catch (error) {
     console.error(error)
     error.type = 'input'

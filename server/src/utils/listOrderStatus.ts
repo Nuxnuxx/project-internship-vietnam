@@ -1,9 +1,3 @@
-
-
-const orderStatus = [
-  "PLACED",
-  "SHIPPED",
-  "DELIVERED",
-]
+const orderStatus = ['PLACED', 'SHIPPED', 'DELIVERED']
 
 export default orderStatus
