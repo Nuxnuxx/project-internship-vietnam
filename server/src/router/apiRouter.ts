@@ -68,6 +68,9 @@ apiRouter.delete('/products/:id',
 
 
 apiRouter.post('/cart',
+  body('productId').exists().isMongoId(),
+  body('quantity').exists().isInt(),
+  handleInputErrors,
   createCart
 )
 
@@ -76,6 +79,9 @@ apiRouter.get('/cart',
 )
 
 apiRouter.put('/cart/:productId',
+  param('productId').exists().isMongoId(),
+  body('quantity').exists().isInt(),
+  handleInputErrors,
   changeCart
 )
 
@@ -84,6 +90,8 @@ apiRouter.delete('/cart',
 )
 
 apiRouter.delete('/cart/:productId',
+  param('productId').exists().isMongoId(),
+  handleInputErrors
   deleteProductInCart
 )
 
