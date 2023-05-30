@@ -214,7 +214,7 @@
         Request body: { "userId": "", "productId": "", "quantity": "" }
         Middeware : 
             - userId exist and is objectID()
-            - productId exista and is a numeric number
+            - productId exist and is a numeric number
             - quantity exist and is a numeric number
             - handleInputErrors
         Response: { "id": "", "userId": "", "items": [{ "productId": "", "quantity": "" }, ...] }
@@ -237,6 +237,11 @@
     Removes a specific product from a user's cart.
         Path parameters: { "userId": "", "productId": "" } (User ID, Product ID)
         Response: { "message": "Product removed from cart successfully." } (This will remove a specific product from the items list in the cart)
+
+### DELETE /api/carts/:userId
+    Remove the cart from the user
+        Path parameters: { "userId": "", } (User ID, Product ID)
+        Response: { "": "Product removed from cart successfully." } (This will remove a specific product from the items list in the cart)
 
 ## Order
 
