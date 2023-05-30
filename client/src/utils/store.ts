@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit"
-import userToken from "./userTokenSlice"
-import formData from "./formDataSlice"
+import userToken from "../redux/userTokenSlice"
+import formLoginData from "../pages/Login/formLoginDataSlice"
 
 const store = configureStore({
-    reducer: { userToken, formData }
+    reducer: { userToken, formLoginData }
 });
 export default store
 

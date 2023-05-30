@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const formDataSlice = createSlice({
-    name: 'formData',
+export const formLoginDataSlice = createSlice({
+    name: 'formLoginData',
     initialState: {
         value: {
             email: "",
@@ -15,5 +15,5 @@ export const formDataSlice = createSlice({
     },
 });
 
-export const { all } = formDataSlice.actions;
-export default formDataSlice.reducer;
+export const { all } = formLoginDataSlice.actions;
+export default formLoginDataSlice.reducer;

@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux"
-import { all } from "./formDataSlice"
+import { all } from "./formLoginDataSlice"
 import { useQuery } from "@tanstack/react-query";
 import fetchLogin from "./fetchLogin";
-import { useAppSelector } from "./hooks";
+import { useAppSelector } from "../../utils/hooks";
 
 const Login = () => {
-    const formData = useAppSelector((state) => state.formData);
+    const formLoginData = useAppSelector((state) => state.formLoginData);
     const dispatch = useDispatch();
-    const results = useQuery(["form", formData], fetchLogin)
+    const results = useQuery(["form", formLoginData], fetchLogin)
+    const token = results?.data?.token ?? "";
 
     return (
         <div className="login-form">
@@ -16,14 +17,14 @@ const Login = () => {
                     e.preventDefault();
                     const formData = new FormData(e.currentTarget);
                     const obj = {
-                        email: formData.get("email")?.toString ?? "",
-                        password: formData.get("password")?.toString ?? ""
+                        email: formData.get("email") ?? "",
+                        password: formData.get("password") ?? ""
                     };
                     dispatch(all(obj))
                 }}
             >
                 <label htmlFor="email">
-                    Location
+                    email
                     <input id="email" name="email" placeholder="E-Mail" />
                 </label>
                 <label htmlFor="password">
@@ -31,7 +32,9 @@ const Login = () => {
                     <input id="password" name="password" placeholder="Password" />
                 </label>
                 <button>Submit</button>
+                <h2>{token}</h2>
             </form>
         </div>
     )
 }
+export default Login
