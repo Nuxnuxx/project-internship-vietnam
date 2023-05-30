@@ -17,6 +17,8 @@
     - protect DONE
     - handleInputError DONE
 
+## Error handler DONE
+
 ## User Router
 
     - declare router endpoint DONE
