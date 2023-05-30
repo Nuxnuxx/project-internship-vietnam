@@ -31,3 +31,7 @@
         - built in middleware DONE
         - params middleware DONE
         - verifyUser
+
+## Product routes
+    
+    - declare endpoint DONE
