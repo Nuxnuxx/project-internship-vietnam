@@ -21,8 +21,6 @@ userRouter.post('/login',
   login
 )
 
-userRouter.use(protect)
-
 userRouter.get('/get/:id',
   param('id').exists().isMongoId(),
   handleInputErrors,
