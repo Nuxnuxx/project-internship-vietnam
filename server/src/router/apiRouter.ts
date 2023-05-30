@@ -5,6 +5,7 @@ import { handleInputErrors } from "../modules/middleware";
 import category from "../utils/listCategory";
 import { changeCart, createCart, deleteCart, deleteProductInCart, getCart } from "../handlers/cart";
 import { protect } from "../modules/authentification";
+import { changeOrder, createOrder, getOrderById, getOrders } from "../handlers/order";
 
 const apiRouter = Router()
 
@@ -101,15 +102,19 @@ apiRouter.delete('/cart/:productId',
 ///////////
 
 apiRouter.post('/orders',
+  createOrder
 )
 
 apiRouter.get('/orders',
+  getOrders
 )
 
 apiRouter.get('/orders/:orderId',
+  getOrderById
 )
 
 apiRouter.put('/orders/:orderId',
+  changeOrder
 )
 
 export default apiRouter
