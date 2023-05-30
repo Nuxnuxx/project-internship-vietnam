@@ -23,25 +23,17 @@ userRouter.post('/login',
 
 userRouter.use(protect)
 
-userRouter.get('/get/:id',
-  param('id').exists().isMongoId(),
-  verifyUser,
-  handleInputErrors,
+userRouter.get('/get',
   getUser
 )
-userRouter.put('/put/:id',
-  param('id').exists().isMongoId(),
-  verifyUser,
+userRouter.put('/put',
   body('email').optional().isEmail(),
   body('username').optional().isString(),
   body('password').optional().isStrongPassword(passwordOptions),
   handleInputErrors,
   changeUser
 )
-userRouter.delete('/delete/:id',
-  param('id').exists().isMongoId(),
-  verifyUser,
-  handleInputErrors,
+userRouter.delete('/delete',
   deleteUser
 )
 

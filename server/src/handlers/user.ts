@@ -54,7 +54,7 @@ export const getUser = async (req, res, next) => {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id: req.params.id,
+        id: req.user.id,
       },
     })
 
@@ -84,7 +84,7 @@ export const changeUser = async (req, res, next) => {
 
   const user = await prisma.user.update({
     where: {
-      id: req.params.id,
+      id: req.user.id,
     },
     data: updateData,
   })
@@ -100,7 +100,7 @@ export const deleteUser = async (req, res, next) => {
   try {
     const user = await prisma.user.delete({
       where: {
-        id: req.params.id,
+        id: req.user.id,
       },
     })
 
