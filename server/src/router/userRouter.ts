@@ -3,7 +3,7 @@ import { changeUser, deleteUser, getUser, login, register } from "../handlers/us
 import { body, param } from "express-validator";
 import passwordOptions from "../utils/passwordStrongOption";
 import { handleInputErrors } from "../modules/middleware";
-import { protect } from "../modules/authentification";
+import { protect, verifyUser } from "../modules/authentification";
 
 const userRouter = Router()
 
@@ -21,13 +21,17 @@ userRouter.post('/login',
   login
 )
 
+userRouter.use(protect)
+
 userRouter.get('/get/:id',
   param('id').exists().isMongoId(),
+  verifyUser,
   handleInputErrors,
   getUser
 )
 userRouter.put('/put/:id',
   param('id').exists().isMongoId(),
+  verifyUser,
   body('email').optional().isEmail(),
   body('username').optional().isString(),
   body('password').optional().isStrongPassword(passwordOptions),
@@ -36,6 +40,7 @@ userRouter.put('/put/:id',
 )
 userRouter.delete('/delete/:id',
   param('id').exists().isMongoId(),
+  verifyUser,
   handleInputErrors,
   deleteUser
 )

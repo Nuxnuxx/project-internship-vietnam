@@ -42,3 +42,10 @@ export const protect = (req, res, next) => {
     return
   }
 }
+
+export const verifyUser = async (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return res.status(403).json({ message: 'Forbidden: You can only access your own data' })
+  }
+  next()
+}

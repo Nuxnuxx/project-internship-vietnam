@@ -30,3 +30,4 @@
     - middleware
         - built in middleware DONE
         - params middleware DONE
+        - verifyUser
