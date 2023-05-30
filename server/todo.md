@@ -53,5 +53,5 @@
     - declare endpoint DONE
     - handler DONE
     - middleware
-        - built in middleware
-        - params middleware
+        - built in middleware DONE
+        - params middleware DONE

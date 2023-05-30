@@ -6,6 +6,7 @@ import category from "../utils/listCategory";
 import { changeCart, createCart, deleteCart, deleteProductInCart, getCart } from "../handlers/cart";
 import { protect } from "../modules/authentification";
 import { changeOrder, createOrder, getOrderById, getOrders } from "../handlers/order";
+import orderStatus from "../utils/listOrderStatus";
 
 const apiRouter = Router()
 
@@ -110,10 +111,15 @@ apiRouter.get('/orders',
 )
 
 apiRouter.get('/orders/:orderId',
+  param('orderId').exists().isMongoId(),
+  handleInputErrors,
   getOrderById
 )
 
 apiRouter.put('/orders/:orderId',
+  param('orderId').exists().isMongoId(),
+  body('orderStatus').exists().isIn(orderStatus),
+  handleInputErrors,
   changeOrder
 )
 
