@@ -7,6 +7,10 @@ import category from "../utils/listCategory";
 const apiRouter = Router()
 
 
+/////////////
+// PRODUCT //
+/////////////
+
 apiRouter.get('/products',
   getProducts
 )
@@ -56,6 +60,21 @@ apiRouter.delete('/products/:id',
   deleteProduct
 )
 
+///////////
+// CARTS //
+///////////
+
+
+apiRouter.post('/carts',
+)
+
+apiRouter.get('/carts/user/:id',
+)
+
+apiRouter.put('/carts/:userId/:productId',
+)
+
+apiRouter.delete('/carts/:userId/:productId',
+)
 
 export default apiRouter
-
