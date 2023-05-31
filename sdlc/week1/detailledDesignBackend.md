@@ -42,14 +42,8 @@
     - verify the token if good token pass the user id that we get from the token to the request params and next
     - if false token return 401
 
-### userSameToken (DEPRECATED)
-    - verify if the id of the query is the same as the id in the token
-    if no return 401
-    else next
-
 ## body sanitize input
     - use of express validator package
-    - custom sanitizer for verifiying if id is objectId (use of mongo + express validator package)
 
 ### handleInputErrors
     - verify if there is error with express validator
@@ -69,7 +63,7 @@
 - user router
     
     - Middeware :
-        - userSameToken (for GET user/:id and PUT user/:id and DELETE user/:id)
+        - protect ( GET, PUT, DELETE)
 
 ## User
 
@@ -83,24 +77,6 @@
             - handleInputErrors
         Response: { "token": "" }
 
-        Algorithm : registerNewUser(req,res,next)
-        try {
-            const user = createUser(
-                email,
-                username,
-                hashedPassword
-                select : id
-            )
-
-            const token = createToken(user.id, 
-            expire : 30day
-            )
-            return token
-        } catch (Error) {
-            Error.type = 'input'
-            next(e)
-        }
-
 ### POST /user/login
     Allows an existing user to log in by providing their email and password. On successful authentication, it will return a JWT token.
         Request body: { "email": "", "password": "" }
@@ -110,54 +86,36 @@
             - handleInputErrors
         Response: { "token": "" }
 
-        Algorithm : loginUser(req,res)
-        const user = find(
-            email
-            select : id
-        )
-        const isValid = comparePassword(req.password, user.password)
-
-        if (!isValid)
-            return 401 + "impossible to connect"
-        
-        const token = createToken(user,
-        expire : 30day
-        )
-        return token
-
-### GET /user/:id
+### GET /user/get
     Fetches the details of a specific user based on the user ID.
-        Path parameters: { "id": "" } (User ID)
+        Request parameters : id (provided by protect Middleware)
         Middeware :
             - protect
-            - userSameToken
         Response: { "id": "", "email": "", "username": "", "createdAt": "" }
 
-### PUT /user/:id
+### PUT /user/put
     Updates the details of a specific user based on the user ID. The details that can be updated include email, username, and password.
-        Path parameters: { "id": "" } (User ID)
+        Request parameters : id (provided by protect Middleware)
         Request body: { "email": "", "username": "", "password": "" } (Optional, only the properties to be updated)
         Middleware :
             - protect
-            - userSameToken
             - email optional and is an email
             - username optional and is a string
             - password optional and is strong (8 character, 1 uppercase, 1 symbol)
             - handleInputErrors
         Response: { "id": "", "email": "", "username": "", "createdAt": "" }
 
-### DELETE /user/:id
+### DELETE /user/delete
     Deletes a specific user based on the user ID.
-        Path parameters: { "id": "" } (User ID)
+        Request parameters : id (provided by protect Middleware)
         Middeware :
             - protect
-            - userSameToken
-        Response: { "message": "User deleted successfully." }
+        Response: { "id": "", "email": "", "username": "", "createdAt": "" }
 
 - api router
 
     - Middeware : 
-        - protect (not for GET products, GET products/:id, GET products/category/:categoryId)
+        - protect (not for GET products, GET products/:id, GET products/category/:categoryName)
 
 ## Product
 
@@ -165,12 +123,13 @@
     Allows a new product to be added to the catalog.
         Request body: { "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "" }
         Middleware :
+            - protect
             - name exist and is a string
             - description exist and is a string
             - price exist and is a float
             - imageUrl exist and is a string
             - category exist and is a string
-            - quantityInStock exist and is a numeric number 
+            - quantityInStock exist and is a int
             - handleInputErrors
         Response: { "id": "", "name": "", "description": "", "price": "", "category": "", "quantityInStock": "", "createdAt": "" }
 
@@ -181,6 +140,8 @@
 ### GET /api/products/:id
     Retrieve a specific product identified by the ID.
         Path parameters: { "id": "" } (Product ID)
+        Middleware:
+            - id exist and is a objectID()
         Response: { "id": "", "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "", "createdAt": "" }
 
 ### PUT /api/products/:id
@@ -188,6 +149,8 @@
         Path parameters: { "id": "" } (Product ID)
         Request body: { "name": "", "description": "", "price": "", "imageUrl": "", "category": "", "quantityInStock": "" } (Optional, only the properties to be updated)
         Middleware :
+            - protect
+            - id exist and is a objectID()
             - name optional and is a string
             - description optional and is a string
             - price optional and is a float
@@ -200,6 +163,9 @@
 ### DELETE /api/products/:id
     Deletes a specific product identified by the ID.
         Path parameters: { "id": "" } (Product ID)
+        Middleware:
+            - protect
+            - id exist and is a objectID()
         Response: { "message": "Product deleted successfully." }
 
 ### GET /api/products/category/:categoryName
@@ -213,54 +179,63 @@
     Create a new cart for a user with a specific product and its quantity.
         Request body: { "userId": "", "productId": "", "quantity": "" }
         Middeware : 
+            - protect
             - userId exist and is objectID()
             - productId exist and is a numeric number
             - quantity exist and is a numeric number
             - handleInputErrors
-        Response: { "id": "", "userId": "", "items": [{ "productId": "", "quantity": "" }, ...] }
+        Response: { "id": "", "userId": "", "productId": "", "priceAtThisTime": "", "quantity": "" }
 
-### GET /api/carts/:userId
+### GET /api/carts
     Retrieves the cart of a specific user.
-        Path parameters: { "userId": "" } (User ID)
-        Response: { "id": "", "userId": "", "items": [{ "productId": "", "quantity": "" }, ...] }
+        Request parameters : id (provided by protect Middleware)
+        Middleware:
+            - protect
+        Response: { "items": [{ "productId": "", "quantity": "" }] }
 
-### PUT /api/carts/:userId/:productId
+### PUT /api/carts/:productId
     Updates the quantity of a specific product in a user's cart.
-        Path parameters: { "userId": "", "productId": "" } (User ID)
+        Path parameters: { "productId": "" }
+        Request parameters : id (provided by protect Middleware)
         Request body: { "quantity" : "" } 
         Middeware :
+            - protect
+            - productId exist and is a objectID()
             - quantity exist and is a numeric number
             - handleInputErrors
         Response: { "id": "", "userId": "", "items": [{ "productId": "", "quantity": "" }, ...] }
 
-### DELETE /api/carts/:userId/:productId
+### DELETE /api/carts/:productId
     Removes a specific product from a user's cart.
-        Path parameters: { "userId": "", "productId": "" } (User ID, Product ID)
-        Response: { "message": "Product removed from cart successfully." } (This will remove a specific product from the items list in the cart)
+        Request parameters : id (provided by protect Middleware)
+        Path parameters: { "productId": "" } (Product ID)
+        Middleware:
+            - productId exist and is a objectID()
+            - handleInputErrors
+        Response: { "id": "", "userId": "", "items": [{ "productId": "", "quantity": "" }, ...] }
 
-### DELETE /api/carts/:userId
+### DELETE /api/carts
     Remove the cart from the user
-        Path parameters: { "userId": "", } (User ID, Product ID)
-        Response: { "": "Product removed from cart successfully." } (This will remove a specific product from the items list in the cart)
+        Request parameters : id (provided by protect Middleware)
+        Response: { "id": "", "userId": "", "items": [{ "productId": "", "quantity": "" }, ...] }
 
 ## Order
 
 ### POST /api/orders
     Place a new order for a user.
-        Request body: { "userId": "" }
-        Middeware : 
-            - userId exist and is objectID()
-            - handleInputErrors
+        Request parameters : id (provided by protect Middleware)
         Response: { "id": "", "createdAt": "", "userId": "", "totalCost": "", "orderStatus": "" }
 
-### GET /api/orders/:userId
+### GET /api/orders
     Retrieves all the orders of a specific user.
-        Path parameters: { "userId": "" } (User ID)
+        Request parameters : id (provided by protect Middleware)
         Response: { "orders": [{ "id": "", "createdAt": "", "userId": "", "totalCost": "", "orderStatus": "" }, ...] }
 
 ### GET /api/orders/:orderId
     Retrieve a specific order along with its items.
         Path parameters: { "orderId": "" } (Order ID)
+        Middleware:
+            - orderId exist and is a objectID()
         Response: { "id": "", "createdAt": "", "userId": "", "totalCost": "", "orderStatus": "", "orderItems": [{ "id": "", "orderId": "", "productId": "", "quantity": "", "price": "" }, ...] }
         
 ### PUT /api/orders/:orderId
