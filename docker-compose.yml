@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.reactUI
+    ports:
+      - "3000:3000"   
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.node
+    ports:
+      - "9000:9000"   
+volumes:
+   slack_db:
