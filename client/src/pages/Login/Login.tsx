@@ -3,6 +3,7 @@ import { all } from './formLoginDataSlice'
 import { useQuery } from '@tanstack/react-query'
 import fetchLogin from './fetchLogin'
 import { useAppSelector } from '../../utils/hooks'
+import Header from '../../Header'
 
 const Login = () => {
     const formLoginData = useAppSelector((state) => state.formLoginData)
@@ -11,6 +12,8 @@ const Login = () => {
     const token = results?.data?.token ?? ''
 
     return (
+        <>
+        <Header/>
         <div className='login-form'>
             <form
                 onSubmit={(e) => {
@@ -38,6 +41,7 @@ const Login = () => {
                 <h2>{token}</h2>
             </form>
         </div>
+        </>
     )
 }
 
