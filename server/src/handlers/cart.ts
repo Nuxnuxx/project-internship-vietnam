@@ -61,7 +61,7 @@ export const createCart = async (req, res, next) => {
       },
     })
 
-    res.json({ cart })
+    res.json({ cartItem })
   } catch (error) {
     console.error(error)
     error.type = 'input'
