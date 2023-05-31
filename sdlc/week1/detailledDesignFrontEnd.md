@@ -2,8 +2,8 @@
 
 ## Main Page
 
-- Component 
-    Main Page 
+ ### Component 
+    - Main Page 
 
         Header
             Sign In (lien)
