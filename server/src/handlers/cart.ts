@@ -16,7 +16,7 @@ export const createCart = async (req, res, next) => {
       return res.status(404).json({ message: 'Product not found' })
     }
 
-        // Check if the cart item already exists for this user and product
+    // Check if the cart item already exists for this user and product
     let cartItem = await prisma.cartItem.findFirst({
       where: {
         userId: req.user.id,
@@ -63,7 +63,7 @@ export const createCart = async (req, res, next) => {
 
     res.json({ cart })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     error.type = 'input'
     next(error)
   }
@@ -72,10 +72,10 @@ export const createCart = async (req, res, next) => {
 export const getCart = async (req, res) => {
   const cart = await prisma.user.findUnique({
     where: {
-      id: req.user.id
+      id: req.user.id,
     },
     include: {
-      cart: true
+      cart: true,
     },
   })
 
@@ -83,9 +83,70 @@ export const getCart = async (req, res) => {
   res.json({ result })
 }
 
-export const changeCart = async (req, res) => {
+export const changeCart = async (req, res, next) => {
+  try {
+    const cartItem = await prisma.cartItem.findFirst({
+      where: {
+        userId: req.user.id,
+        productId: req.params.productId,
+      },
+    })
+
+    if (!cartItem) {
+      return res.status(404).json({ message: 'Cart item not found' })
+    }
+
+    const updatedCartItem = await prisma.cartItem.update({
+      where: {
+        id: cartItem.id,
+      },
+      data: {
+        quantity: req.body.quantity,
+      },
+    })
+
+    res.json({ cartItem: updatedCartItem })
+  } catch (error) {
+    console.error(error)
+    error.type = 'input'
+    next(error)
+  }
 }
 
-export const deleteCart = async (req, res) => {}
+export const deleteCart = async (req, res, next) => {
+  try {
+    const result = await prisma.cartItem.deleteMany({
+      where: {
+        userId: req.user.id,
+      },
+    })
 
-export const getCartByCategory = async (req, res) => {}
+    res.json({ result })
+  } catch (error) {
+    console.log(error)
+    error.type = 'input'
+    next(error)
+  }
+}
+
+export const deleteProductInCart = async (req, res, next) => {
+  try {
+    const result = await prisma.cartItem.deleteMany({
+      where: {
+        userId: req.user.id,
+        productId: req.params.productId, // Make sure to convert productId to number
+      },
+    })
+
+    if (result.count === 0) {
+      // If no cart item was deleted, return an error
+      return res.status(404).json({ message: 'Cart item not found' })
+    }
+
+    res.json({ result })
+  } catch (error) {
+    console.log(error)
+    error.type = 'input'
+    next(error)
+  }
+}

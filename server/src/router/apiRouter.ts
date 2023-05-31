@@ -1,39 +1,59 @@
-import { Router } from "express";
-import { changeProduct, createProduct, deleteProduct, getProduct, getProductByCategory, getProducts } from "../handlers/product";
-import { body, param } from "express-validator";
-import { handleInputErrors } from "../modules/middleware";
-import category from "../utils/listCategory";
-import { createCart, getCart } from "../handlers/cart";
-import { protect } from "../modules/authentification";
+import { Router } from 'express'
+import {
+  changeProduct,
+  createProduct,
+  deleteProduct,
+  getProduct,
+  getProductByCategory,
+  getProducts,
+} from '../handlers/product'
+import { body, param } from 'express-validator'
+import { handleInputErrors } from '../modules/middleware'
+import category from '../utils/listCategory'
+import {
+  changeCart,
+  createCart,
+  deleteCart,
+  deleteProductInCart,
+  getCart,
+} from '../handlers/cart'
+import { protect } from '../modules/authentification'
+import {
+  changeOrder,
+  createOrder,
+  getOrderById,
+  getOrders,
+} from '../handlers/order'
+import orderStatus from '../utils/listOrderStatus'
 
 const apiRouter = Router()
-
 
 /////////////
 // PRODUCT //
 /////////////
 
-apiRouter.get('/products',
-  getProducts
-)
+apiRouter.get('/products', getProducts)
 
-apiRouter.get('/products/:id',
+apiRouter.get(
+  '/products/:id',
   param('id').exists().isMongoId(),
   handleInputErrors,
-  getProduct
+  getProduct,
 )
 
-apiRouter.get('/products/category/:categoryName',
+apiRouter.get(
+  '/products/category/:categoryName',
   param('categoryName').exists().isIn(category),
   handleInputErrors,
-  getProductByCategory
+  getProductByCategory,
 )
 
 apiRouter.use(protect)
 
 // Those routes need admin status
 
-apiRouter.post('/products',
+apiRouter.post(
+  '/products',
   body('name').exists().isString(),
   body('description').exists().isString(),
   body('price').exists().isFloat(),
@@ -41,10 +61,11 @@ apiRouter.post('/products',
   body('category').exists().isString(),
   body('quantityInStock').exists().isInt(),
   handleInputErrors,
-  createProduct
+  createProduct,
 )
 
-apiRouter.put('/products/:id',
+apiRouter.put(
+  '/products/:id',
   param('id').exists().isMongoId(),
   body('name').optional().isString(),
   body('description').optional().isString(),
@@ -53,32 +74,68 @@ apiRouter.put('/products/:id',
   body('category').optional().isString(),
   body('quantityInStock').optional().isInt(),
   handleInputErrors,
-  changeProduct
+  changeProduct,
 )
 
-apiRouter.delete('/products/:id',
+apiRouter.delete(
+  '/products/:id',
   param('id').exists().isMongoId(),
   handleInputErrors,
-  deleteProduct
+  deleteProduct,
 )
 
 ///////////
 // CARTS //
 ///////////
 
-
-apiRouter.post('/cart',
-  createCart
+apiRouter.post(
+  '/cart',
+  body('productId').exists().isMongoId(),
+  body('quantity').exists().isInt(),
+  handleInputErrors,
+  createCart,
 )
 
-apiRouter.get('/cart',
-  getCart
+apiRouter.get('/cart', getCart)
+
+apiRouter.put(
+  '/cart/:productId',
+  param('productId').exists().isMongoId(),
+  body('quantity').exists().isInt(),
+  handleInputErrors,
+  changeCart,
 )
 
-apiRouter.put('/cart/:productId',
+apiRouter.delete('/cart', deleteCart)
+
+apiRouter.delete(
+  '/cart/:productId',
+  param('productId').exists().isMongoId(),
+  handleInputErrors,
+  deleteProductInCart,
 )
 
-apiRouter.delete('/cart',
+///////////
+// CARTS //
+///////////
+
+apiRouter.post('/orders', createOrder)
+
+apiRouter.get('/orders', getOrders)
+
+apiRouter.get(
+  '/orders/:orderId',
+  param('orderId').exists().isMongoId(),
+  handleInputErrors,
+  getOrderById,
+)
+
+apiRouter.put(
+  '/orders/:orderId',
+  param('orderId').exists().isMongoId(),
+  body('orderStatus').exists().isIn(orderStatus),
+  handleInputErrors,
+  changeOrder,
 )
 
 export default apiRouter

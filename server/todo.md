@@ -43,4 +43,20 @@
 ## Carts routes
 
     - declare endpoint DONE
-    - handler
+    - handler DONE
+    - middleware
+        - built in middleware DONE
+        - params middleware DONE
+
+## Order routes
+
+    - declare endpoint DONE
+    - handler DONE
+    - middleware
+        - built in middleware DONE
+        - params middleware DONE
+
+## Unit Testing
+
+## Integration Testing
+
