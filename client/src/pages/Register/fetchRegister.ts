@@ -1,4 +1,4 @@
-import { MutationFunction} from "@tanstack/react-query";
+import { MutationFunction } from '@tanstack/react-query'
 
 type RegisterFormParams = {
   value: {
@@ -12,9 +12,10 @@ type APIRegisterResponse = {
   token: string
 }
 
-const fetchRegister:MutationFunction<APIRegisterResponse, ['form', RegisterFormParams]> = async (
-  mutationKey 
-) => {
+const fetchRegister: MutationFunction<
+  APIRegisterResponse,
+  ['form', RegisterFormParams]
+> = async (mutationKey) => {
   const { email, username, password } = mutationKey[1].value
 
   if (!email || !username || !password) {
@@ -30,9 +31,10 @@ const fetchRegister:MutationFunction<APIRegisterResponse, ['form', RegisterFormP
       email,
       username,
       password,
-    })
+    }),
   })
-  if (!token.ok) throw new Error(`no token for: ${email}, ${username}, ${password}`)
+  if (!token.ok)
+    throw new Error(`no token for: ${email}, ${username}, ${password}`)
 
   return token.json()
 }

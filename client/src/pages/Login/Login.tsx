@@ -1,51 +1,90 @@
 import { useDispatch } from 'react-redux'
 import { all } from './formLoginDataSlice'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import fetchLogin from './fetchLogin'
 import { useAppSelector } from '../../utils/hooks'
 import Header from '../../Header'
 import { Link } from 'react-router-dom'
+import { set } from '../../redux/userTokenSlice'
+import { useState } from 'react'
+import { isValidEmail, isValidPassword } from '../../utils/verif'
 
 const Login = () => {
   const formLoginData = useAppSelector((state) => state.formLoginData)
   const dispatch = useDispatch()
-  const results = useQuery(['form', formLoginData], fetchLogin)
-  const token = results?.data?.token ?? ''
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [validLogin, setValidLogin] = useState([false, false])
+  const results = useMutation({
+    mutationFn: () => {
+      return fetchLogin(['form', formLoginData])
+    },
+    onSuccess: (data) => {
+      dispatch(set(data))
+    },
+  })
 
   return (
-    < >
-      <Header/>
+    <>
+      <Header />
       <div className='container-center-collumn'>
         <h1>Login</h1>
-        <form className='user-form'
+
+        <form
+          className='user-form'
           onSubmit={(e) => {
             e.preventDefault()
-            const formData = new FormData(e.currentTarget)
+
             const obj = {
-              email: formData.get('email') ?? '',
-              password: formData.get('password') ?? '',
+              email: email,
+              password: password,
             }
             dispatch(all(obj))
+            results.mutate()
           }}
         >
           <label htmlFor='email'>
-            <h3>email</h3> 
-            <input id='email' name='email' placeholder='E-Mail' />
+            <h3>email</h3>
+            <input
+              id='email'
+              name='email'
+              placeholder='E-Mail'
+              onChange={(e) => {
+                setEmail(e.target.value)
+                if (isValidEmail(e.target.value)) {
+                  setValidLogin([true, validLogin[1]])
+                } else {
+                  setValidLogin([false, validLogin[1]])
+                }
+              }}
+            />
           </label>
 
           <label htmlFor='password'>
             <h3>Password</h3>
-            <input id='password' name='password' placeholder='Password' type="password" />
+            <input
+              id='password'
+              name='password'
+              placeholder='Password'
+              type='password'
+              onChange={(e) => {
+                if (isValidPassword(e.target.value)) {
+                  setPassword(e.target.value)
+                  setValidLogin([validLogin[0], true])
+                } else {
+                  setValidLogin([validLogin[0], false])
+                }
+              }}
+            />
           </label>
 
-          <button>Login</button>
-
-          <h2>{token}</h2>
+          {validLogin[0] && validLogin[1] ? <button>Login</button> : null}
         </form>
         <p>Not Registered ?</p>
-        <Link to="/register">Click Here</Link>
+        <Link to='/register'>Click Here</Link>
       </div>
-    </> 
-  )}
+    </>
+  )
+}
 
 export default Login
