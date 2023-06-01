@@ -63,6 +63,10 @@
         Test with each parameter missing or invalid to ensure error handling is working properly DONE
         Test with existing user data to make sure it handles duplicates correctly DONE
 
+### User Login - POST /user/login
+        Test with a valid email and password DONE
+        Test with invalid email or password DONE
+        Test with a non-existent user DONE
 
 ## Integration Testing
 

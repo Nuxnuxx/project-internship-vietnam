@@ -2,7 +2,7 @@ import { User } from '@prisma/client'
 import { prismaMock } from '../../singleton'
 import app from '../../server'
 import request from 'supertest'
-import { hashPassword } from '../../modules/authentification'
+import * as auth from '../../modules/authentification'
 
 describe('User Test Suites', () => {
   let mockUser: User
@@ -66,5 +66,60 @@ describe('User Test Suites', () => {
     })
   })
 
-  describe('POST user/login', () => {})
+  describe('POST user/login', () => {
+    test('with valid email and password', async () => {
+      prismaMock.user.findUnique.mockResolvedValue(mockUser)
+      jest.spyOn(auth, 'comparePasswords').mockResolvedValue(true)
+
+      const response = await request(app).post('/user/login').send({
+        email: 'test@test.com',
+        password: 'testUser9000.',
+      })
+
+      expect(response.status).toBe(200)
+      expect(response.body).toHaveProperty('token')
+    })
+
+    test('with invalid email and good password', async () => {
+      prismaMock.user.findUnique.mockResolvedValue(null)
+      jest.spyOn(auth, 'comparePasswords').mockResolvedValue(true)
+
+      const response = await request(app).post('/user/login').send({
+        email: 'test@miam.com',
+        password: 'testUser9000.',
+      })
+
+
+      expect(response.status).toBe(404)
+      expect(response.body).toHaveProperty('message')
+    })
+
+    test('with good email and invalid password', async () => {
+      prismaMock.user.findUnique.mockResolvedValue(mockUser)
+      jest.spyOn(auth, 'comparePasswords').mockResolvedValue(false)
+
+      const response = await request(app).post('/user/login').send({
+        email: 'test@test.com',
+        password: 'testUser90',
+      })
+
+
+      expect(response.status).toBe(409)
+      expect(response.body).toHaveProperty('errors')
+    })
+
+    test('with an invalid user', async () => {
+      prismaMock.user.findUnique.mockResolvedValue(null)
+      jest.spyOn(auth, 'comparePasswords').mockResolvedValue(true)
+
+      const response = await request(app).post('/user/login').send({
+        email: 'test@miam.com',
+        password: 'testUser9000.',
+      })
+
+
+      expect(response.status).toBe(404)
+      expect(response.body).toHaveProperty('message')
+    })
+  })
 })
