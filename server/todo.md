@@ -58,11 +58,23 @@
 
 ## Unit Testing
 
+## Integration Testing
+
 ### User Registration - POST /user/register
         Test with all required parameters provided correctly DONE
         Test with each parameter missing or invalid to ensure error handling is working properly DONE
         Test with existing user data to make sure it handles duplicates correctly DONE
 
+### User Login - POST /user/login
+        Test with a valid email and password DONE
+        Test with invalid email or password DONE
+        Test with a non-existent user DONE
 
-## Integration Testing
+### Get User Details - GET /user
+        Test with a valid user id DONE
+        Test with an invalid or non-existent user id DONE
+
+### Update User Details - PUT /user/:id
+        Test with valid and invalid parameters
+        Test with a non-existent user id
 
