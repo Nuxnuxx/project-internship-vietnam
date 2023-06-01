@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom"
+import { useAppSelector } from "./utils/hooks"
 
 const Header = () => {
-    return (
-        <div className="header">
-            <div className="user-section">
-                <img src="../src/assets/img/user-icon.svg"/>
-                <Link to="/register">Register</Link >
-                <Link to="/login">Login</Link>
-            </div>
-        </div >
-    )
+  const userToken = useAppSelector((state) => state.userToken.value)
+  return (
+    <div className="header">
+      {userToken ? (
+        <div className="user-section" >
+          <img src="../src/assets/img/user-icon.svg"/>
+          <Link to="/login">Login</Link>
+        </div>
+      ):(
+          <div className="user-section" >
+            <img src="../src/assets/img/user-icon.svg"/>
+          </div>
+        )}
+    </div >
+  )
 }
 
 export default Header
