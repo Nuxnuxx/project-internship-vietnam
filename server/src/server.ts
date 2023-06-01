@@ -16,11 +16,11 @@ app.use('/api', apiRouter)
 
 app.use((err, req, res, next) => {
   if (err.type === 'auth') {
-    res.status(401).json({ message: 'unauthorized' })
+    res.status(401).json({ errors: 'unauthorized' })
   } else if (err.type === 'input') {
-    res.status(400).json({ message: 'invalid input' })
+    res.status(409).json({ errors: 'invalid input' })
   } else {
-    res.status(500).json({ message: 'oops, that on us' })
+    res.status(500).json({ errors: 'oops, that on us' })
   }
 })
 

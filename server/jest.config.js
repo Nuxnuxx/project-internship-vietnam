@@ -5,5 +5,6 @@ module.exports = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
-  resetModules: false
+  resetModules: false,
+  setupFilesAfterEnv: ['./src/singleton.ts']
 };

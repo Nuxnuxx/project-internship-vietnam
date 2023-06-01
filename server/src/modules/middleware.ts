@@ -3,7 +3,7 @@ export const handleInputErrors = (req, res, next) => {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
-    res.status(404)
+    res.status(409)
     res.json({ errors: errors.array() })
   } else {
     next()

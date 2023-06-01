@@ -19,6 +19,10 @@ export const register = async (req, res, next) => {
       },
     })
 
+    if (!user) {
+      return res.status(500).json({ message: 'User not created'})
+    }
+
     const token = createJWT(user.id)
     res.json({ token })
   } catch (error) {
@@ -35,6 +39,10 @@ export const login = async (req, res, next) => {
         email: req.body.email,
       },
     })
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
 
     const isValid = await comparePasswords(req.body.password, user.password)
 
