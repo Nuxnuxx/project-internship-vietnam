@@ -1,19 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 export const formRegisterDataSlice = createSlice({
-    name: 'formRegisterData',
-    initialState: {
-        value: {
-            email: '',
-            username: '',
-            password: '',
-        },
+  name: 'formRegisterData',
+  initialState: {
+    value: {
+      email: '',
+      username: '',
+      password: '',
     },
-    reducers: {
-        all: (state, actions) => {
-            state.value = actions.payload
-        }
-    }
+  },
+  reducers: {
+    all: (state, actions) => {
+      state.value = actions.payload
+    },
+  },
 })
 
 export const { all } = formRegisterDataSlice.actions
