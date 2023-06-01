@@ -5,23 +5,20 @@ import request from 'supertest'
 import { hashPassword } from '../../modules/authentification'
 
 describe('User Test Suites', () => {
+  let mockUser: User
+
+  beforeAll(async () => {
+    mockUser = {
+      id: '1',
+      email: 'test@test.com',
+      username: 'testUser',
+      createdAt: new Date(),
+      password: 'testUser9000.',
+    }
+
+    process.env.JWT_SECRET = 'cookies'
+  })
   describe('POST user/register', () => {
-    let mockUser: User
-
-    beforeAll(async () => {
-      const hashedPassword = await hashPassword('testPassword')
-
-      mockUser = {
-        id: '1',
-        email: 'test@test.com',
-        username: 'testUser',
-        createdAt: new Date(),
-        password: 'testUser9000.',
-      }
-
-      process.env.JWT_SECRET = 'cookies'
-    })
-
     test('with all required parameters provided correctly', async () => {
       prismaMock.user.create.mockResolvedValue(mockUser)
 
@@ -47,5 +44,27 @@ describe('User Test Suites', () => {
       expect(response.status).toBe(409)
       expect(response.body).toHaveProperty('errors')
     })
+
+    test('with a duplicate username or email', async () => {
+      prismaMock.user.create.mockResolvedValueOnce(mockUser)
+
+      const response1 = await request(app).post('/user/register').send({
+        email: 'test@test.com',
+        username: 'testUser',
+        password: 'testUser9000.',
+      })
+      expect(response1.status).toBe(200)
+      expect(response1.body).toHaveProperty('token')
+
+      const response2 = await request(app).post('/user/register').send({
+        email: 'test@test.com',
+        username: 'testUser',
+        password: 'testUser9000.',
+      })
+      expect(response2.status).toBe(500)
+      expect(response2.body).toHaveProperty('message')
+    })
   })
+
+  describe('POST user/login', () => {})
 })

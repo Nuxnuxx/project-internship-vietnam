@@ -19,6 +19,10 @@ export const register = async (req, res, next) => {
       },
     })
 
+    if (!user) {
+      return res.status(500).json({ message: 'User not created'})
+    }
+
     const token = createJWT(user.id)
     res.json({ token })
   } catch (error) {
