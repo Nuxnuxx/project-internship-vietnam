@@ -79,6 +79,14 @@ export const getCart = async (req, res) => {
     },
   })
 
+  if (!cart) {
+      return res.status(404).json({ message: 'User not found' })
+  }
+
+  if (!cart.cart) {
+      return res.status(404).json({ message: 'Cart item not found' })
+  }
+
   const result = cart.cart
   res.json({ result })
 }
