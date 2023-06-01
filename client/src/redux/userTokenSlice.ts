@@ -4,11 +4,11 @@ export const userTokenSlice = createSlice({
   name: 'userToken',
   initialState: { value: undefined },
   reducers: {
-    get: (state, action) => {
+    set: (state, action) => {
       state.value = action.payload
     },
   },
 })
 
-export const { get } = userTokenSlice.actions
+export const { set } = userTokenSlice.actions
 export default userTokenSlice.reducer
