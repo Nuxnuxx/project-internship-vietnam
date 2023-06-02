@@ -1,0 +1,9 @@
+.disable {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.active {
+  pointer-events: initial;
+  opacity: 1;
+}

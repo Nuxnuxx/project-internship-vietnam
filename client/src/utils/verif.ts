@@ -13,5 +13,5 @@ export const isValidPassword = (password: string) => {
 }
 
 export const isValidUsername = (username: string) => {
-  return username.length > 3 ? true : false
+  return username.length > 2 ? true : false
 }
