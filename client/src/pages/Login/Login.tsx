@@ -4,13 +4,14 @@ import { useMutation } from '@tanstack/react-query'
 import fetchLogin from './fetchLogin'
 import { useAppSelector } from '../../utils/hooks'
 import Header from '../../Header'
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { set } from '../../redux/userTokenSlice'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { isValidEmail, isValidPassword } from '../../utils/verif'
 
 const Login = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const formLoginData = useAppSelector((state) => state.formLoginData)
 
   const [email, setEmail] = useState('')
@@ -19,13 +20,19 @@ const Login = () => {
   const [validLogin, setValidLogin] = useState([false, false])
   const [emailFocus, setemailFocus] = useState(false)
   const [passwordFocus, setpasswordFocus] = useState(false)
+  const [loginFailed, setLoginFailed] = useState(false)
 
   const results = useMutation({
     mutationFn: () => {
       return fetchLogin(['form', formLoginData])
     },
     onSuccess: (data) => {
+      setLoginFailed(false)
       dispatch(set(data))
+      navigate('/')
+    },
+    onError: () => {
+      setLoginFailed(true)
     },
   })
 
@@ -102,6 +109,9 @@ const Login = () => {
             {' '}
             Login{' '}
           </button>
+          {loginFailed ? (
+            <div> Connection Failed </div>
+          ) : null}
         </form>
         <p>Not Registered ?</p>
         <Link to='/register'>Click Here</Link>

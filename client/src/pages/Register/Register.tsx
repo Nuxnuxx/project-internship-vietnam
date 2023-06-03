@@ -11,9 +11,11 @@ import {
   isValidEmail,
 } from '../../utils/verif'
 import { useState } from 'react'
+import { NavigationType, redirect, useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const formRegisterData = useAppSelector((state) => state.formRegisterData)
 
   const [email, setEmail] = useState('')
@@ -24,6 +26,7 @@ const Register = () => {
   const [emailFocus, setEmailFocus] = useState(false)
   const [usernameFocus, setUsernameFocus] = useState(false)
   const [passwordFocus, setPasswordFocus] = useState(false)
+  const [registerFailed, setregisterFailed] = useState(false)
 
   const results = useMutation({
     mutationFn: () => {
@@ -31,6 +34,11 @@ const Register = () => {
     },
     onSuccess: (data) => {
       dispatch(set(data))
+      setregisterFailed(false)
+      navigate('/')
+    },
+    onError: () => {
+      setregisterFailed(true)
     },
   })
 
@@ -141,8 +149,12 @@ const Register = () => {
                 : 'disable'
             }
           >
-            Login
+            Register
           </button>
+          {registerFailed ? (
+            <div> Register Failed </div>
+          ) : null}
+
         </form>
       </div>
     </>
