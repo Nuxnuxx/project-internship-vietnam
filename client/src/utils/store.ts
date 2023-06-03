@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import userToken from '../redux/userTokenSlice'
 import formLoginData from '../pages/Login/formLoginDataSlice'
 import formRegisterData from '../pages/Register/formRegisterDataSlice'
+import productData from '../components/ProductList/productDataSlice'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
 import thunk from 'redux-thunk'
@@ -14,6 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   userToken: persistReducer(persistConfig, userToken),
   formLoginData,
+  productData,
   formRegisterData,
 })
 
