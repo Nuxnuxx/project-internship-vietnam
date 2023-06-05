@@ -1,11 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+interface ProductDataState {
+  value: Product[]
+}
+
+const initialState: ProductDataState = {
+  value: [],
+}
+
 export const productDataSlice = createSlice({
   name: 'productData',
-  initialState: {
-    value: {
-    },
-  },
+  initialState,
   reducers: {
     all: (state, actions) => {
       state.value = actions.payload

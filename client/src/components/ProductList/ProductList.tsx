@@ -3,19 +3,20 @@ import { useQuery } from "@tanstack/react-query"
 import fetchProducts from "./fetchProduct"
 import { all } from "./productDataSlice"
 import ProductCart from "../ProductCart/ProductCart"
+import { useAppSelector } from "../../utils/hooks"
 
 const ProductList = () => {
   const dispatch = useDispatch()
-  const results = useQuery(['products'], fetchProducts)
-  const products = results?.data?.products ?? []
+  const products = useAppSelector(state => state.productData)
+  const {isSuccess, data} = useQuery(['products'], fetchProducts)
 
-  if (results.isSuccess) {
-    dispatch(all(products))
+  if (isSuccess) {
+    dispatch(all(data?.products ?? []))
   }
 
   return (
     <div className="product-list">
-      {products.map((product, index) => {
+      {products.value.map((product, index) => {
         return <ProductCart key={index} {...product}/>
       })}
   </div>

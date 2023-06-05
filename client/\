@@ -1,0 +1,19 @@
+const SearchBar = () => {
+  const categories: CATEGORY[] = [
+    'CATEGORY1',
+    'CATEGORY2',
+    'CATEGORY3',
+    'CATEGORY4',
+  ]
+
+  return (
+    <div className='search-bar'>
+      {categories.map((categorie, index) => (
+        <input key={index} value={categorie}/>
+      ))}
+      <button> Search </button>
+    </div>
+  )
+}
+
+export default SearchBar

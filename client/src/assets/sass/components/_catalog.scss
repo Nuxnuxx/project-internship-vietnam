@@ -5,14 +5,31 @@
 }
 
 .search-bar {
-  border: 1px solid red;
+  border: 0px solid red;
   margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .checkbox-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem;
+
+    .checkbox {
+      cursor: pointer;
+      border: 1px solid red;
+      padding: 1rem;
+    }
+  }
+  padding-bottom: 1rem;
+  border-bottom: 1px solid black;
 }
 
 .product-card {
   max-width: 12em;
   margin: 2rem;
-  background-color: blue;
+  background-color:#05187a;
   padding: 1em;
   box-shadow: 0 5px 5px #e1e1e1;
   font-family: Arial, Helvetica, sans-serif;
