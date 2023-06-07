@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useAppSelector } from '../../utils/hooks'
 import AddCart from '../AddCart/AddCart'
+import Header from '../../Header'
 
 const Detail = () => {
   const { id } = useParams()
@@ -9,6 +10,7 @@ const Detail = () => {
   )
   return (
     <div>
+      <Header/>
       {product ? (
         <>
           <h2>{product.name}</h2>

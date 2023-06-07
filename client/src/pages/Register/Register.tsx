@@ -33,7 +33,7 @@ const Register = () => {
       return fetchRegister(['form', formRegisterData])
     },
     onSuccess: (data) => {
-      dispatch(set(data))
+      dispatch(set(data.token))
       setregisterFailed(false)
       navigate('/')
     },

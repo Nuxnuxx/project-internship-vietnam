@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux'
 import { set } from './redux/userTokenSlice'
 
 const Header = () => {
-  const userToken = useAppSelector((state) => state.userToken.value)
+  const {token} = useAppSelector((state) => state.userToken.value)
   const dispatch = useDispatch()
   return (
     <div className='header'>
-      {!userToken ? (
+      {!token ? (
         <div className='user-section'>
           <img src='../src/assets/img/user-icon.svg' />
           <Link to='/login'>Login</Link>
@@ -19,10 +19,15 @@ const Header = () => {
           <a onClick={() => dispatch(set(undefined))}>Log Out</a>
         </div>
       )}
-        <div className='cart-section'>
-          <img src='../src/assets/img/cart-icon.svg' />
+
+      <div className='user-section'>
+        <img src='../src/assets/img/home-icon.svg' />
+        <Link to='/catalog'> Catalog </Link>
+      </div>
+      <div className='cart-section'>
+        <img src='../src/assets/img/cart-icon.svg' />
         <Link to='/cart'> Cart </Link>
-        </div>
+      </div>
     </div>
   )
 }
