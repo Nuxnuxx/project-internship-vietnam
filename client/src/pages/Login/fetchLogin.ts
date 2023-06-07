@@ -18,7 +18,7 @@ const fetchLogin: MutationFunction<
   const { email, password } = mutationKey[1].value
 
   if (!email || !password) {
-    throw new Error(`error in form`)
+    throw new Error(`error in form`)  
   }
 
   const token = await fetch(`http://localhost:3001/user/login/`, {

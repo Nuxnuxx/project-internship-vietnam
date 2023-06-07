@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import fetchLogin from './fetchLogin'
 import { useAppSelector } from '../../utils/hooks'
 import Header from '../../Header'
-import { Link, redirect, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { set } from '../../redux/userTokenSlice'
 import { useState } from 'react'
 import { isValidEmail, isValidPassword } from '../../utils/verif'
@@ -83,9 +83,7 @@ const Login = () => {
             name='password'
             placeholder='Password'
             type='password'
-            className={
-              !validLogin[1] && passwordFocus ? 'input-error' : ''
-            }
+            className={!validLogin[1] && passwordFocus ? 'input-error' : ''}
             onChange={(e) => {
               if (isValidPassword(e.target.value)) {
                 setPassword(e.target.value)
@@ -98,7 +96,6 @@ const Login = () => {
           />
           {!validLogin[1] && passwordFocus ? (
             <p className='input-error-title'>
-              {' '}
               Invalid Password (8 character, 1 uppercase, 1 symbol)
             </p>
           ) : null}
@@ -109,9 +106,7 @@ const Login = () => {
             {' '}
             Login{' '}
           </button>
-          {loginFailed ? (
-            <div> Connection Failed </div>
-          ) : null}
+          {loginFailed ? <div> Connection Failed </div> : null}
         </form>
         <p>Not Registered ?</p>
         <Link to='/register'>Click Here</Link>
