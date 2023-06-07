@@ -151,10 +151,7 @@ const Register = () => {
           >
             Register
           </button>
-          {registerFailed ? (
-            <div> Register Failed </div>
-          ) : null}
-
+          {registerFailed ? <div> Register Failed </div> : null}
         </form>
       </div>
     </>
