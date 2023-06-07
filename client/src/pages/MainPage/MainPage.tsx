@@ -1,10 +1,10 @@
-import Header from "../../Header"
+import Header from '../../Header'
 
 const MainPage = () => {
   return (
     <>
-    <Header/>
-    Main page
+      <Header />
+      Main page
     </>
   )
 }
