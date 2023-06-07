@@ -13,17 +13,17 @@ const SearchBar = () => {
     'CATEGORY4',
   ]
 
-  const [selectedCategory, setSelectedCategory] = useState<CATEGORY | null>(
-    null,
-  )
+  const [selectedCategory, setSelectedCategory] = useState<CATEGORY>()
+  const [shouldFetch, setShouldFetch] = useState(true)
 
   const result = useQuery(
     ['productsByCategory', selectedCategory],
     fetchProductsByCategory,
     {
-      enabled: selectedCategory !== null,
+      enabled: shouldFetch,
       onSuccess: (data) => {
-        dispatch(all(data))
+        dispatch(all(data.products))
+        setShouldFetch(false)
       },
     },
   )
@@ -31,19 +31,19 @@ const SearchBar = () => {
   return (
     <div className='search-bar'>
       <div className='checkbox-list'>
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <button
+            key={index}
             onClick={() => {
               setSelectedCategory(category)
-              result.refetch()
+              setShouldFetch(true)
+              result.remove()
             }}
           >
-            {' '}
-            {category}{' '}
+            {category}
           </button>
         ))}
       </div>
-      <button> Search </button>
     </div>
   )
 }
