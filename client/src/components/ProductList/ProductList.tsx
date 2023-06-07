@@ -1,25 +1,15 @@
-import { useDispatch } from "react-redux"
-import { useQuery } from "@tanstack/react-query"
-import fetchProducts from "./fetchProduct"
-import { all } from "./productDataSlice"
-import ProductCart from "../ProductCart/ProductCart"
-import { useAppSelector } from "../../utils/hooks"
+import ProductCard from '../ProductCard/ProductCard'
+import { useAppSelector } from '../../utils/hooks'
 
 const ProductList = () => {
-  const dispatch = useDispatch()
-  const products = useAppSelector(state => state.productData)
-  const {isSuccess, data} = useQuery(['products'], fetchProducts)
-
-  if (isSuccess) {
-    dispatch(all(data?.products ?? []))
-  }
+  const products = useAppSelector((state) => state.productData)
 
   return (
-    <div className="product-list">
+    <div className='product-list'>
       {products.value.map((product, index) => {
-        return <ProductCart key={index} {...product}/>
+        return <ProductCard key={index} {...product} />
       })}
-  </div>
+    </div>
   )
 }
 
