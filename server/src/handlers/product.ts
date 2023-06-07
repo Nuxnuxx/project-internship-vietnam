@@ -89,7 +89,7 @@ export const deleteProduct = async (req, res) => {
 export const getProductByCategory = async (req, res) => {
   const products = await prisma.product.findMany({
     where: {
-      category: req.params.category,
+      category: req.params.categoryName,
     },
   })
 
