@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import fetchProductById from './fetchProductById'
+import DeleteCartItem from '../DeleteCartItem/DeleteCartItem'
 
 type CartItem = {
   id: string
@@ -29,6 +30,7 @@ const ShoppingCartItem = (props: CartItem) => {
         <div>{props.priceAtThisTime}$</div>
       </div>
       <div>{props.quantity}</div>
+      <DeleteCartItem id={product.id} />
     </div>
   )
 }

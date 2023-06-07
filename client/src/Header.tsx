@@ -19,6 +19,10 @@ const Header = () => {
           <a onClick={() => dispatch(set(undefined))}>Log Out</a>
         </div>
       )}
+        <div className='cart-section'>
+          <img src='../src/assets/img/cart-icon.svg' />
+        <Link to='/cart'> Cart </Link>
+        </div>
     </div>
   )
 }

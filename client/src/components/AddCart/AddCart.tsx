@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import mutateCart from "./mutateCart"
 import { useAppSelector } from "../../utils/hooks"
@@ -7,17 +7,19 @@ const AddCart = ({productId}:{productId:string}) => {
   const [quantity, setQuantity] = useState(1)
   
   const { token } = useAppSelector((state)=> state.userToken.value);
+  const queryClient = useQueryClient()
 
   const obj = {
     productId: productId,
     quantity: quantity,
-    token: token
+    token: token as unknown as string
   }
   const addMutation = useMutation({
     mutationFn: () => {
       return mutateCart(['itemInfo', obj])
     },
-    onSuccess:(data) => {
+    onSuccess:() => {
+      queryClient.invalidateQueries({queryKey: ['cart']})
     }
   })
 

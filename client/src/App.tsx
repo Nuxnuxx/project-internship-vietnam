@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import MainPage from './pages/MainPage/MainPage'
 import Catalog from './pages/Catalog/Catalog'
 import Detail from './components/Detail/Detail'
+import ShoppingCart from './pages/ShoppingCart/ShoppingCart'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,7 @@ const App = () => {
                 <Route path='/register' element={<Register />} />
                 <Route path='/catalog' element={<Catalog />} />
                 <Route path='/details/:id' element={<Detail />} />
+                <Route path='/cart' element={<ShoppingCart />} />
               </Routes>
             </QueryClientProvider>
           </PersistGate>
