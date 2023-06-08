@@ -86,12 +86,18 @@ export const deleteProduct = async (req, res) => {
   res.json({ product })
 }
 
-export const getProductByCategory = async (req, res) => {
+export const getProductByCategory = async (req, res, next) => {
+  try {
   const products = await prisma.product.findMany({
     where: {
       category: req.params.categoryName,
     },
   })
-
   res.json({ products })
+  } catch (error) {
+    console.log(error)
+    error.type = 'input'
+    next(error)
+  }
+
 }
