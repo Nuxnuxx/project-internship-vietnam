@@ -34,10 +34,13 @@ model Product {
 }
 
 enum CATEGORY {
-  CATEGORY1
-  CATEGORY2
-  CATEGORY3
-  CATEGORY4
+  HIKING
+  BASKETBALL
+  BOXING
+  RUNNING
+  TENNIS
+  CAMPING
+  SWIMMING
 }
 
 model CartItem {
