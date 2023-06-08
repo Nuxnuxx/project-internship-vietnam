@@ -6,11 +6,11 @@ const ProductList = () => {
 
   return (
     <div className='product-list'>
-      {products.value.map((product, index) => {
-        return <ProductCard key={index} {...product} />
-      })}
+      {products.value.map((product, index) => (
+         <ProductCard key={index} {...product} />
+      ))}
     </div>
-  )
+ )
 }
 
 export default ProductList

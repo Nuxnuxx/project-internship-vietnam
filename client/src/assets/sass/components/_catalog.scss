@@ -4,6 +4,21 @@
   align-items: center;
 }
 
+.product-list {
+  display: grid;
+  grid-template-columns: 1fr;   
+
+  @include breakpoint(tablet){
+    grid-template-columns:  1fr 1fr;
+  }
+  @include breakpoint(desktop){
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @include breakpoint(large){
+    grid-template-columns:  1fr 1fr 1fr 1fr;
+  }
+}
+
 .search-bar {
   border: 0px solid red;
   margin: 2rem;
@@ -27,6 +42,7 @@
 }
 
 .product-card {
+
   max-width: 12em;
   margin: 2rem;
   background-color:#05187a;
