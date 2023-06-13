@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import fetchProductsByCategory from './fetchProductsByCategory'
 import { useState } from 'react'
 import { all } from '../ProductList/productDataSlice'
+import fetchProductsBySemantic from './FetchProductsBySemantic'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,8 @@ const SearchBar = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<CATEGORY>()
   const [shouldFetch, setShouldFetch] = useState(true)
+  const [input, setInput] = useState("")
+  const [data, setdata] = useState([])
 
   const result = useQuery(
     ['productsByCategory', selectedCategory],
@@ -27,6 +30,13 @@ const SearchBar = () => {
       },
     },
   )
+
+  const inputResult = useQuery(['semantic', input], fetchProductsBySemantic, {
+    enabled: !!input,
+    onSuccess: (data) => {
+      setdata(data.saucisse)
+    }
+  })
 
   return (
     <div className='search-bar'>
@@ -44,6 +54,13 @@ const SearchBar = () => {
           </button>
         ))}
       </div>
+      <input onChange={(e) => setInput(e.target.value)}/>
+      {data.map((value, index) => (
+        <div key={index}>
+          <h1> {value.name}</h1>
+          <p> {value.description}</p>
+        </div>
+      ))}
     </div>
   )
 }

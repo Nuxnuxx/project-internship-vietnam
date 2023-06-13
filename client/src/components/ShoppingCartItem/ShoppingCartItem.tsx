@@ -20,7 +20,7 @@ const ShoppingCartItem = (props: CartItem) => {
     return <div>X</div>
   }
 
-  const product = data.product
+  const product = data.product ?? []
 
   return (
     <div className='cart-item'>
