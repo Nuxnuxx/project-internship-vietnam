@@ -64,6 +64,13 @@ model Order {
   userId      String
   user        User         @relation(fields: [userId], references: [id])
   totalCost   Float
+  email       String       
+  adress      String
+  detail      String?
+  zipcode     String  
+  country     String
+  lastname    String
+  firstname   String
   orderStatus ORDER_STATUS @default(PLACED)
   createdAt   DateTime     @default(now())
   items       OrderItem[]

@@ -25,6 +25,7 @@ import {
   getOrders,
 } from '../handlers/order'
 import orderStatus from '../utils/listOrderStatus'
+import { isString } from 'util'
 
 const apiRouter = Router()
 
@@ -119,7 +120,15 @@ apiRouter.delete(
 // CARTS //
 ///////////
 
-apiRouter.post('/orders', createOrder)
+apiRouter.post('/orders',
+  body('email').exists().isString(),
+  body('firstname').exists().isString(),
+  body('lastname').exists().isString(),
+  body('adress').exists().isString(),
+  body('detail').optional().isString(),
+  body('zipcode').exists().isString(),
+  body('country').exists().isString(), 
+  createOrder)
 
 apiRouter.get('/orders', getOrders)
 

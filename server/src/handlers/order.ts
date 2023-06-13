@@ -2,6 +2,8 @@ import prisma from '../db'
 
 export const createOrder = async (req, res, next) => {
   try {
+    const {email, adress, detail, zipcode, country, lastname, firstname} = req.body 
+
     const cartItems = await prisma.cartItem.findMany({
       where: {
         userId: req.user.id,
@@ -30,6 +32,13 @@ export const createOrder = async (req, res, next) => {
             price: item.priceAtThisTime,
           })),
         },
+        email: email,
+        firstname : firstname,
+        lastname: lastname,
+        adress: adress,
+        detail: detail,
+        zipcode: zipcode,
+        country: country,
       },
     })
 

@@ -28,7 +28,7 @@ const Login = () => {
     },
     onSuccess: (data) => {
       setLoginFailed(false)
-      dispatch(set(data))
+      dispatch(set(data.token))
       navigate('/')
     },
     onError: () => {
