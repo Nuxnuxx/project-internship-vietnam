@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import userToken from '../redux/userTokenSlice'
 import formLoginData from '../pages/Login/formLoginDataSlice'
 import formRegisterData from '../pages/Register/formRegisterDataSlice'
+import formOrderData from '../components/OrderForm/formOrderDataSlice'
 import productData from '../components/ProductList/productDataSlice'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   formLoginData,
   productData,
   formRegisterData,
+  formOrderData,
 })
 
 export const store = configureStore({
