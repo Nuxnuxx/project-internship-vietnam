@@ -14,4 +14,11 @@ type Product = {
   OrderItem: OrderItem[]
 }
 
-type CATEGORY = 'CATEGORY1' | 'CATEGORY2' | 'CATEGORY3' | 'CATEGORY4'
+type CATEGORY =
+  | 'HIKING'
+  | 'BASKETBALL'
+  | 'BOXING'
+  | 'RUNNING'
+  | 'TENNIS'
+  | 'CAMPING'
+  | 'SWIMMING';

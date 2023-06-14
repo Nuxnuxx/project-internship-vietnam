@@ -1,3 +1,11 @@
-const category = ['CATEGORY1', 'CATEGORY2', 'CATEGORY3', 'CATEGORY4']
+const category= [
+  'HIKING',
+  'BASKETBALL',
+  'BOXING',
+  'RUNNING',
+  'TENNIS',
+  'CAMPING',
+  'SWIMMING',
+];
 
-export default category
+export default category;
