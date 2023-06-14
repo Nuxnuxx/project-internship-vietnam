@@ -8,12 +8,14 @@ import fetchProductsBySemantic from './FetchProductsBySemantic'
 const SearchBar = () => {
   const dispatch = useDispatch()
   const categories: CATEGORY[] = [
-    'CATEGORY1',
-    'CATEGORY2',
-    'CATEGORY3',
-    'CATEGORY4',
-  ]
-
+    'HIKING',
+    'BASKETBALL',
+    'BOXING',
+    'RUNNING',
+    'TENNIS',
+    'CAMPING',
+    'SWIMMING',
+  ];
   const [selectedCategory, setSelectedCategory] = useState<CATEGORY>()
   const [shouldFetch, setShouldFetch] = useState(true)
   const [input, setInput] = useState("")

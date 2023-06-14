@@ -1,68 +1,75 @@
 .catalog {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  @include breakpoint(desktop){
+    flex-direction: row;
+  }
 }
 
 .product-list {
   display: grid;
-  grid-template-columns: 1fr;   
+  grid-template-columns: 1fr 1fr;   
 
   @include breakpoint(tablet){
-    grid-template-columns:  1fr 1fr;
+    grid-template-columns:  1fr 1fr 1fr;
   }
+
   @include breakpoint(desktop){
     grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
   }
+
   @include breakpoint(large){
     grid-template-columns:  1fr 1fr 1fr 1fr;
   }
 }
 
 .search-bar {
-  border: 0px solid red;
-  margin: 2rem;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  position: sticky; 
 
-  .checkbox-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 1rem;
+  .checkbox-list{
+    display: flex;
+  }
 
-    .checkbox {
-      cursor: pointer;
-      border: 1px solid red;
-      padding: 1rem;
+  @include breakpoint(desktop){
+    top: 0;
+    width: 20%;
+    border-right: 2px solid black;
+
+    .checkbox-list {
+      flex-direction: column;
+      align-items: center;
+      button{
+        height: 2rem;
+        width: 70%;
+        margin-bottom: 1rem;
+      }
     }
   }
-  padding-bottom: 1rem;
-  border-bottom: 1px solid black;
 }
+
 
 .product-card {
-
   max-width: 12em;
   margin: 2rem;
-  background-color:#05187a;
-  padding: 1em;
-  box-shadow: 0 5px 5px #e1e1e1;
-  font-family: Arial, Helvetica, sans-serif;
 
-  img {
-    max-width: 100%;
+  .image-preview{
+    background-color: grey;
+    height: 10rem;
   }
 
-  h4 {
-    font-size: 1.3em;
-    margin: 0.5em 0;
+  .card-info{
+    min-height: 7rem;
+    background-color:#05187a;
+    padding: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: lightgrey 
   }
-
-  div {
-    font-size: 1.2em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  &:hover{
+    box-shadow: 10px 5px lightgrey ;
   }
 }
+
