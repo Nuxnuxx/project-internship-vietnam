@@ -9,6 +9,7 @@ import MainPage from './pages/MainPage/MainPage'
 import Catalog from './pages/Catalog/Catalog'
 import Detail from './components/Detail/Detail'
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart'
+import OrderForm from './components/OrderForm/OrderForm'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +34,7 @@ const App = () => {
                 <Route path='/catalog' element={<Catalog />} />
                 <Route path='/details/:id' element={<Detail />} />
                 <Route path='/cart' element={<ShoppingCart />} />
+                <Route path='/checkout' element={<OrderForm />} />
               </Routes>
             </QueryClientProvider>
           </PersistGate>
