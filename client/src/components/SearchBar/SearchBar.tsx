@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { useDispatch } from 'react-redux'
 import fetchProductsByCategory from './fetchProductsByCategory'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { all } from '../ProductList/productDataSlice'
 import fetchProductsBySemantic from './FetchProductsBySemantic'
+import SemanticSearchCard from '../SemanticSearchCard/SemanticSearchCard'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
@@ -33,12 +34,32 @@ const SearchBar = () => {
     },
   )
 
-  const inputResult = useQuery(['semantic', input], fetchProductsBySemantic, {
-    enabled: !!input,
+  const [debouncedInput, setDebouncedInput] = useState({
+    value: "",
+    hasBeenDebounced: false
+  });
+
+  const inputResult = useQuery(['semantic', debouncedInput.value], fetchProductsBySemantic, {
+    enabled: !!debouncedInput.value && debouncedInput.hasBeenDebounced,
     onSuccess: (data) => {
       setdata(data.saucisse)
-    }
+    },
+    refetchOnWindowFocus: false
   })
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedInput((prevInput) => ({
+        ...prevInput,
+        value: input,
+        hasBeenDebounced: true,
+      }))
+    }, 900)
+
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [input])
 
   return (
     <div className='search-bar'>
@@ -57,12 +78,11 @@ const SearchBar = () => {
         ))}       
       </div>
       <input placeholder='What do you search' onChange={(e) => setInput(e.target.value)}/>
-      {data.map((value, index) => (
-        <div key={index}>
-          <h1> {value.name}</h1>
-          <p> {value.description}</p>
-        </div>
-      ))}
+      <div className='semantic-list'>
+      {input && data.map((value, index) => {
+        return <SemanticSearchCard key={index} id={value.id} />
+      })}
+      </div>
     </div>
   )
 }

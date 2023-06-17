@@ -11,7 +11,7 @@ const fetchProductById: QueryFunction<APIResponse, ['product', string | undefine
 
   const product = await fetch(`http://localhost:3001/api/products/${id}`)
 
-  if (!product.ok) throw new Error('Impossible to fetch the cart for the user')
+  if (!product.ok) throw new Error('impossible to fetch product')
 
   return product.json()
 }
