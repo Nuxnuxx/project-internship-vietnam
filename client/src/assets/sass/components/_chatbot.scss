@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-top: 30px;
-  width: 300px;
-  height: 500px;
-  border-radius: 25px;
+  margin-top: 1rem;
+  width: 17rem;
+  height: 30rem;
+  border-radius: 2rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 
@@ -17,7 +17,7 @@
     align-items: center;
     height: 15%;
     background-color: $mainColor;
-    border-radius: 25px 25px 0 0;
+    border-radius: 2rem 2rem 0 0;
     div {
       display: flex;
       flex-direction: row;
@@ -68,15 +68,52 @@
     height: 10%;
     background-color: $thirdColor;
     border-radius: 0 0 25px 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-top: 1px solid $mainColor;
+    margin-top: 1rem;
+
+    form {
+      padding: 1rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      column-gap: 0.5rem;
+      input {
+        width: 12rem;
+        border-radius: 2rem;
+        border: 1px solid $mainColor;
+        height: 2rem;
+        padding-left: 0.7rem;
+      }
+      button {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        justify-content: center;
+        all: unset;
+        height: 2rem;
+        img {
+          height: 100%;
+          width: 2.5rem;
+          aspect-ratio: 1;
+          filter: invert(55%) sepia(97%) saturate(3665%) hue-rotate(91deg)
+            brightness(127%) contrast(122%);
+        }
+      }
+    }
   }
 
   .message {
     padding: 7px 10px 7px 10px;
     border-radius: 20px;
     margin: 10px 10px;
-    width: fit-content;
-    min-height: 20px;
+    width: 65%;
+    flex-wrap: wrap;
     font-family: 'Heebo', sans-serif;
+    font-size: 0.7rem;
   }
 
   .user-message {

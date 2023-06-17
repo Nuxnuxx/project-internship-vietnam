@@ -11,6 +11,25 @@
     margin-bottom: 2rem;
   }
 
+  @include breakpoint(tablet) {
+    img {
+      width: 70%;
+      aspect-ratio: 1;
+      height: unset;
+    }
+  }
+
+  @include breakpoint(desktop) {
+    flex-direction: row;
+    height: 80vh;
+    img {
+      padding: 2rem;
+      border-radius: 6rem;
+      height: 29rem;
+      aspect-ratio: 1;
+    }
+  }
+
   .detail-info {
     width: 80%;
     display: flex;
@@ -26,7 +45,7 @@
       font-size: 1.2rem;
       flex-grow: 1;
     }
-    
+
     .price {
       font-weight: bold;
       font-size: 1.4rem;
@@ -43,25 +62,69 @@
         border-radius: 2rem;
         padding: 1.5rem;
         width: 4rem;
+        text-align: center;
+        align-items: center;
       }
 
       button {
         width: 5rem;
         border-radius: 2rem;
         flex-grow: 1;
-          font-size: 1.3rem;
+        font-size: 1.3rem;
         background-color: $mainColor;
+        color: white;
         ::disabled {
           color: black;
         }
       }
-
-
     }
-  }
 
+    @include breakpoint(tablet) {
+      h2 {
+        font-size: 3rem;
+      }
 
-  @include breakpoint(tablet) {
-    flex-direction: row;
+      .description {
+        font-size: 1.4rem;
+      }
+
+      .price {
+        font-size: 2rem;
+      }
+
+      .add-cart {
+        padding-bottom: 2rem;
+        input {
+          height: 4.5rem;
+        }
+      }
+    }
+
+    @include breakpoint(desktop) {
+      padding: 6rem;
+      h2 {
+        font-size: 3rem;
+      }
+
+      .description {
+        font-size: 1.4rem;
+      }
+
+      .price {
+        font-size: 2rem;
+        flex-grow: 1;
+      }
+
+      .add-cart {
+        input {
+          height: 3.5rem;
+          width: 6rem;
+        }
+        button {
+          width: 6rem;
+          flex-grow: 1;
+        }
+      }
+    }
   }
 }

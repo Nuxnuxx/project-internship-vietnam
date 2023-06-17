@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import fetchProductById from './fetchProductById'
 import DeleteCartItem from '../DeleteCartItem/DeleteCartItem'
+import Loading from '../Loading/Loading'
 
 type CartItem = {
   id: string
@@ -18,7 +19,7 @@ const ShoppingCartItem = (props: CartItem) => {
   )
 
   if (isLoading || !data) {
-    return <div>X</div>
+    return <Loading/>
   }
 
   const product = data.product ?? []

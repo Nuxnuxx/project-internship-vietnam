@@ -27,7 +27,9 @@ const ChatBot = () => {
             <img src='../src/assets/img/robot.svg' />
             <p className='name'> FredBot</p>
           </div>
-          <button className='close'><img src='../src/assets/img/close.svg'/></button>
+          <button className='close'>
+            <img src='../src/assets/img/close.svg' />
+          </button>
         </div>
         {!token ? (
           <div className='chatbot-notlogin'>
@@ -58,16 +60,25 @@ const ChatBot = () => {
               <form
                 onSubmit={(event) => {
                   event.preventDefault()
-                  let form = new FormData(event.currentTarget)
-                  let request = form.get('request')?.toString()
-                  if (request) {
-                    setUserRequest(request)
-                    dispatch(add({ origin: 'user', text: request }))
+                  const form = new FormData(event.currentTarget)
+                  if (userRequest) {
+                    dispatch(add({ origin: 'user', text: userRequest }))
                   }
+                  setUserRequest('')
                 }}
               >
-                <input name='request' placeholder='ask Fred' />
-                <button>Click</button>
+                <input
+                  value={userRequest}
+                  name='request'
+                  onChange={(e) => setUserRequest(e.target.value)}
+                  placeholder='ask Fred'
+                />
+                <button>
+                  <img
+                    src='../../../src/assets/img/play.svg'
+                    alt='send-message'
+                  />
+                </button>
               </form>
             </div>
           </>

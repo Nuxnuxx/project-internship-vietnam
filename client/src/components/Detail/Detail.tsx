@@ -2,14 +2,27 @@ import { useParams } from 'react-router-dom'
 import { useAppSelector } from '../../utils/hooks'
 import AddCart from '../AddCart/AddCart'
 import Header from '../../Header'
+import { useQuery } from '@tanstack/react-query'
+import fetchProductById from '../ShoppingCartItem/fetchProductById'
+import Loading from '../Loading/Loading'
 
 const Detail = () => {
   const { id } = useParams()
-  const product = useAppSelector((state) =>
-    state.productData.value.find((product) => product.id === id),
-  )
+  const { isLoading, data } = useQuery(['product', id], fetchProductById)
 
   const imageUrl = `../../src/assets/img/product3/${product?.imageUrl}`
+  if (isLoading || !data) {
+    return (
+      <>
+        <Header />
+        <Loading/>
+      </>
+    )
+  }
+
+  const product = data?.product ?? []
+
+  const imageUrl = `../../src/assets/img/product/${product.imageUrl}`
   return (
     <>
       <Header />
@@ -19,7 +32,7 @@ const Detail = () => {
           <div className='detail-info'>
             <h2>{product.name}</h2>
             <p className='description'>{product.description}</p>
-            <p className='price'>Price: ${product.price}</p>
+            <p className='price'> ${product.price}</p>
             <AddCart productId={product.id} />
           </div>
         ) : null}
