@@ -9,7 +9,7 @@ const Detail = () => {
     state.productData.value.find((product) => product.id === id),
   )
 
-  const imageUrl = `../../src/assets/img/product/${product?.imageUrl}`
+  const imageUrl = `../../src/assets/img/product3/${product?.imageUrl}`
   return (
     <>
       <Header />

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 const ProductCard = (props: Product) => {
   const navigate = useNavigate()
-  const imageUrl = `../../src/assets/img/product/${props.imageUrl}`
+  const imageUrl = `../../src/assets/img/product3/${props.imageUrl}`
 
   return (
     <div

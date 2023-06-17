@@ -23,7 +23,7 @@ const ShoppingCartItem = (props: CartItem) => {
 
   const product = data.product ?? []
 
-  const imageUrl = `../../src/assets/img/product/${product.imageUrl}`
+  const imageUrl = `../../src/assets/img/product3/${product.imageUrl}`
   return (
     <div className='cart-item'>
       <img src={imageUrl}/>
