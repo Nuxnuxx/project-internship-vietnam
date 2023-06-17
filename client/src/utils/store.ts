@@ -5,6 +5,7 @@ import formRegisterData from '../pages/Register/formRegisterDataSlice'
 import formOrderData from '../components/OrderForm/formOrderDataSlice'
 import productData from '../components/ProductList/productDataSlice'
 import storage from 'redux-persist/lib/storage'
+import discussion from '../components/ChatBot/chatMessageSlice'
 import { persistReducer, persistStore } from 'redux-persist'
 import thunk from 'redux-thunk'
 
@@ -19,6 +20,8 @@ const rootReducer = combineReducers({
   productData,
   formRegisterData,
   formOrderData,
+  discussion,
+  
 })
 
 export const store = configureStore({
