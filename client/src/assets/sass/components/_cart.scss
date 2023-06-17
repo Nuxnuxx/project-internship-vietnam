@@ -11,7 +11,8 @@
   padding: 0 1rem 0 1rem;
   border-bottom: 1px solid $mainColorDarker;
   border-width:medium;
-  padding-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
   img {
     aspect-ratio: 1;
     border-radius: 1.5rem;
@@ -28,7 +29,7 @@
     }
     .price-at-this-time {
       font-weight: 300;
-      font-weight: 0.6rem;
+      font-size: 0.6rem;
       flex-grow: 1;
     }
 
@@ -51,6 +52,63 @@
         background-repeat: no-repeat;
         background-size: 70%;
         background-position: center;
+      }
+    }
+  }
+  @include breakpoint(tablet) {
+    img {
+      height: 15rem;
+    }
+
+    .cart-info {
+      width: 100%;
+
+      .name {
+        font-size: 2rem;
+      }
+
+      .price-at-this-time { 
+        font-size: 1.6rem;
+      }
+
+      .cart-action {
+        div {
+          font-size: 2rem;
+        }
+
+        .button-delete-item {
+          width: 4rem;
+          height: 4rem;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(desktop) {
+    img {
+      height: 11rem;
+    }
+
+    .cart-info {
+      width: 100%;
+
+      .name {
+        font-size: 1.5rem;
+      }
+
+      .price-at-this-time { 
+        font-size: 1.2rem;
+      }
+
+      .cart-action {
+        div {
+          font-size: 1rem;
+        }
+
+        .button-delete-item {
+          width: 3rem;
+          height: 3rem;
+        }
       }
     }
   }

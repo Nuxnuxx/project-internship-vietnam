@@ -16,10 +16,10 @@ const SearchBar = () => {
     'TENNIS',
     'CAMPING',
     'SWIMMING',
-  ];
+  ]
   const [selectedCategory, setSelectedCategory] = useState<CATEGORY>()
   const [shouldFetch, setShouldFetch] = useState(true)
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState('')
   const [data, setdata] = useState([])
 
   const result = useQuery(
@@ -35,17 +35,21 @@ const SearchBar = () => {
   )
 
   const [debouncedInput, setDebouncedInput] = useState({
-    value: "",
-    hasBeenDebounced: false
-  });
-
-  const inputResult = useQuery(['semantic', debouncedInput.value], fetchProductsBySemantic, {
-    enabled: !!debouncedInput.value && debouncedInput.hasBeenDebounced,
-    onSuccess: (data) => {
-      setdata(data.saucisse)
-    },
-    refetchOnWindowFocus: false
+    value: '',
+    hasBeenDebounced: false,
   })
+
+  const inputResult = useQuery(
+    ['semantic', debouncedInput.value],
+    fetchProductsBySemantic,
+    {
+      enabled: !!debouncedInput.value && debouncedInput.hasBeenDebounced,
+      onSuccess: (data) => {
+        setdata(data.saucisse)
+      },
+      refetchOnWindowFocus: false,
+    },
+  )
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -75,13 +79,19 @@ const SearchBar = () => {
           >
             {category}
           </button>
-        ))}       
+        ))}
       </div>
-      <input placeholder='What do you search' onChange={(e) => setInput(e.target.value)}/>
-      <div className='semantic-list'>
-      {input && data.map((value, index) => {
-        return <SemanticSearchCard key={index} id={value.id} />
-      })}
+      <div className='semantic'>
+        <input
+          placeholder='What do you search'
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <div className='semantic-list'>
+          {input &&
+            data.map((value, index) => {
+              return <SemanticSearchCard key={index} id={value.id} />
+            })}
+        </div>
       </div>
     </div>
   )

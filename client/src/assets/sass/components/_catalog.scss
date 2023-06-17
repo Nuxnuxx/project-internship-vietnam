@@ -11,6 +11,8 @@
   margin-top: 2rem;
   grid-template-columns: 1fr 1fr;
   row-gap: 2rem;
+  align-items: center;
+  justify-items: center;
 
   @include breakpoint(tablet) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -33,6 +35,28 @@
   padding-bottom: 1.5rem;
   flex-direction: column;
   position: sticky;
+
+  @include breakpoint(tablet) {
+    border-right: unset;
+    width: unset;
+  }
+
+  .semantic {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include breakpoint(tablet) {
+      align-items: center;
+      input {
+        align-self: center;
+      }
+
+      .semantic-list {
+        width: 100%;
+      }
+    }
+  }
 
   .checkbox-list {
     display: grid;
@@ -67,19 +91,44 @@
     margin-top: 1rem;
   }
 
+  @include breakpoint(tablet) {
+    top: 0;
+    flex-direction: row;
+    position: relative;
+
+    .checkbox-list {
+      padding-left: 4rem;
+      flex-direction: column;
+      align-items: center;
+      button {
+        height: 1rem;
+        margin-bottom: 1rem;
+      }
+      padding-right: 4rem;
+    }
+    input {
+      align-self: start;
+      width: 50%;
+    }
+  }
+
   @include breakpoint(desktop) {
     top: 0;
     width: 20%;
     border-right: 2px solid black;
+    display: flex;
+    flex-direction: column;
 
     .checkbox-list {
       flex-direction: column;
       align-items: center;
+      padding: 0 0 0 0;
       button {
         height: 2rem;
         width: 70%;
         margin-bottom: 1rem;
       }
+
     }
   }
 }
