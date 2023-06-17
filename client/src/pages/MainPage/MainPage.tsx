@@ -1,12 +1,20 @@
 import Header from '../../Header'
-import ChatBot from '../../components/ChatBot/ChatBot.tsx'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+import 'swiper/css'
+import { Link } from 'react-router-dom'
 
 const MainPage = () => {
   return (
     <>
       <Header />
-      <ChatBot />
-      Main page
+    <div className='main-page'>
+      <Link to="/catalog" className='promo'>
+        <p>
+        20% OFF ON SWIMMING EQUIPMENT
+        </p>
+      </Link>
+    </div>
     </>
   )
 }

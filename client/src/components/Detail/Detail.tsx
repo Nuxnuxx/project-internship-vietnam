@@ -10,7 +10,6 @@ const Detail = () => {
   const { id } = useParams()
   const { isLoading, data } = useQuery(['product', id], fetchProductById)
 
-  const imageUrl = `../../src/assets/img/product3/${product?.imageUrl}`
   if (isLoading || !data) {
     return (
       <>
@@ -22,7 +21,7 @@ const Detail = () => {
 
   const product = data?.product ?? []
 
-  const imageUrl = `../../src/assets/img/product/${product.imageUrl}`
+  const imageUrl = `../../src/assets/img/product3/${product.imageUrl}`
   return (
     <>
       <Header />

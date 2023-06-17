@@ -13,7 +13,7 @@ const SemanticSearchCard = ({id}: {id: string}) => {
   }
 
   const props = data?.product ?? []
-  const imageUrl = `../../src/assets/img/product/${props.imageUrl}`
+  const imageUrl = `../../src/assets/img/product3/${props.imageUrl}`
 
   return (
     <div

@@ -5,9 +5,9 @@ import { useMutation } from '@tanstack/react-query'
 import mutateOrder from "./mutateOrder"
 import { useAppSelector } from "../../utils/hooks"
 import { all } from './formOrderDataSlice'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
-const OrderForm = () => {
+const Order = () => {
   const dispatch = useDispatch()
   const formOrderData = useAppSelector((state) => state.formOrderData)
   const {token} = useAppSelector((state) => state.userToken.value)
@@ -33,9 +33,10 @@ const OrderForm = () => {
   return(
     <>
      <Header/>
-      <div className="oderForm">
+      <div className="order">
+        <Link className="button-order" to='/cart'>Cart </Link>
         <form 
-          className='test-form'
+          className='form'
           onSubmit={(e) => {
             e.preventDefault()
           const obj = {
@@ -118,10 +119,11 @@ const OrderForm = () => {
         <button
           className="active" 
         >
+            Checkout
         </button>
       </form>
       </div>
     </>
   )
 } 
-export default OrderForm
+export default Order
