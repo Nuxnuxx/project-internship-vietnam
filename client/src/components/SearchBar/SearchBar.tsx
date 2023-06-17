@@ -54,7 +54,7 @@ const SearchBar = () => {
           >
             {category}
           </button>
-        ))}
+        ))}       
       </div>
       <input onChange={(e) => setInput(e.target.value)}/>
       {data.map((value, index) => (

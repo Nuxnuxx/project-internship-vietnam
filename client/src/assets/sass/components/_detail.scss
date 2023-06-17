@@ -1,0 +1,13 @@
+.img-test{
+  width:250px;
+  height:600px;
+  background-color: red; 
+}
+
+.detail-layout{
+  display: flex;
+
+  @include breakpoint(tablet){
+    flex-direction: row;
+  }
+}

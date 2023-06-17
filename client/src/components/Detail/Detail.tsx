@@ -9,17 +9,22 @@ const Detail = () => {
     state.productData.value.find((product) => product.id === id),
   )
   return (
-    <div>
+    <>
       <Header/>
+      <div className='detail-layout'>
+        <div className='detail-image'>
+          <div className='img-test'></div>
+        </div>
       {product ? (
-        <>
+        <div className='detail-info'>
           <h2>{product.name}</h2>
           <p>{product.description}</p>
           <p>Price: ${product.price}</p>
           <AddCart productId={product.id}/>
-        </>
+        </div>
       ) : null}
-    </div>
+      </div>
+    </>
   )
 }
 
