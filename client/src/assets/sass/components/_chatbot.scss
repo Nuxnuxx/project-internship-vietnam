@@ -1,4 +1,4 @@
-.chatbot{
+.chatbot {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -6,50 +6,85 @@
   width: 300px;
   height: 500px;
   border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  
-  .chatbot-header{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+  .chatbot-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 1rem 0 1rem;
+    align-items: center;
     height: 15%;
-    background-color: $mainColor; 
+    background-color: $mainColor;
     border-radius: 25px 25px 0 0;
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 0.6rem;
+
+      img {
+        width: 2.5rem;
+        filter: invert(90%) sepia(22%) saturate(40%) hue-rotate(139deg)
+          brightness(102%) contrast(105%);
+      }
+
+      p {
+        color: white;
+        font-size: 1rem;
+      }
+    }
+    button {
+      all: unset;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 2rem;
+        filter: invert(90%) sepia(22%) saturate(40%) hue-rotate(139deg)
+          brightness(102%) contrast(105%);
+      }
+    }
   }
 
-  .chatbot-notlogin{
-    display: flex;
-    flex-direction: column; 
-    align-items:center;
-    padding: 20px;
-  }
-  
-  .chatbot-body{
+  .chatbot-notlogin {
     display: flex;
     flex-direction: column;
-    height:75%;
+    align-items: center;
+    padding: 20px;
   }
 
-  .chatbot-searchbar{
+  .chatbot-body {
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+  }
+
+  .chatbot-searchbar {
     height: 10%;
     background-color: $thirdColor;
-    border-radius: 0 0 25px 25px ;
+    border-radius: 0 0 25px 25px;
   }
-  
-.message{
-  padding: 7px 10px 7px 10px;
-  border-radius: 20px; 
-  margin: 10px 10px;
-  width:fit-content;
-  min-height:20px;
-  font-family: 'Heebo', sans-serif;
-}
 
-.user-message{
-  background-color: $thirdColorDarker;
-  align-self:end;
-}
+  .message {
+    padding: 7px 10px 7px 10px;
+    border-radius: 20px;
+    margin: 10px 10px;
+    width: fit-content;
+    min-height: 20px;
+    font-family: 'Heebo', sans-serif;
+  }
 
-.bot-message{
-  background-color: $mainColorLighter;
-}
+  .user-message {
+    background-color: $thirdColorDarker;
+    align-self: end;
+  }
 
-
+  .bot-message {
+    background-color: $mainColorLighter;
+  }
 }

@@ -56,7 +56,7 @@ const SearchBar = () => {
           </button>
         ))}       
       </div>
-      <input onChange={(e) => setInput(e.target.value)}/>
+      <input placeholder='What do you search' onChange={(e) => setInput(e.target.value)}/>
       {data.map((value, index) => (
         <div key={index}>
           <h1> {value.name}</h1>

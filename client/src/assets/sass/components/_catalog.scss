@@ -1,40 +1,73 @@
 .catalog {
   display: flex;
   flex-direction: column;
-  @include breakpoint(desktop){
+  @include breakpoint(desktop) {
     flex-direction: row;
   }
 }
 
 .product-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;   
+  margin-top: 2rem;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 2rem;
 
-  @include breakpoint(tablet){
-    grid-template-columns:  1fr 1fr 1fr;
+  @include breakpoint(tablet) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
-  @include breakpoint(desktop){
+  @include breakpoint(desktop) {
     grid-template-columns: 1fr 1fr 1fr;
     width: 80%;
   }
 
-  @include breakpoint(large){
-    grid-template-columns:  1fr 1fr 1fr 1fr;
+  @include breakpoint(large) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
 .search-bar {
-  padding-top: 2rem;
+  padding-top: 1rem;
   display: flex;
+  border-bottom: 2px solid $mainColor;
+  padding-bottom: 1.5rem;
   flex-direction: column;
-  position: sticky; 
+  position: sticky;
 
-  .checkbox-list{
-    display: flex;
+  .checkbox-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+
+    button {
+      all: unset;
+      border: 1px solid $mainColor;
+      width: 7rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      margin: 0.4rem;
+      padding: 0.2rem;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    :last-child {
+      grid-column: 1 / span 2;
+    }
   }
 
-  @include breakpoint(desktop){
+  input {
+    width: 70%;
+    height: 2rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid $mainColor;
+    align-self: center;
+    margin-top: 1rem;
+  }
+
+  @include breakpoint(desktop) {
     top: 0;
     width: 20%;
     border-right: 2px solid black;
@@ -42,7 +75,7 @@
     .checkbox-list {
       flex-direction: column;
       align-items: center;
-      button{
+      button {
         height: 2rem;
         width: 70%;
         margin-bottom: 1rem;
@@ -51,25 +84,32 @@
   }
 }
 
-
 .product-card {
   max-width: 12em;
-  margin: 2rem;
+  cursor: pointer;
+  margin: 0.9rem;
 
-  .image-preview{
-    background-color: grey;
-    height: 10rem;
+  .image-preview {
+    aspect-ratio: 1;
+    border-radius: 1rem;
+    width: 100%;
   }
 
-  .card-info{
-    min-height: 7rem;
-    background-color:#05187a;
-    padding: 1em;
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    padding-top: 0.2rem;
     font-family: Arial, Helvetica, sans-serif;
-    color: lightgrey 
+    color: black;
+    h4 {
+      flex-grow: 1;
+      width: 100%;
+    }
   }
-  &:hover{
-    box-shadow: 10px 5px lightgrey ;
+
+  & hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
 }
-

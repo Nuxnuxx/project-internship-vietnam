@@ -15,7 +15,7 @@ const ChatBot = () => {
   const response = useQuery(['request', userRequest], fetchChatBot, {
     onSuccess: (data) => {
       console.log(data.message[0].answer)
-      dispatch(add({origin: "bot", text: data.message[0].answer}))
+      dispatch(add({ origin: 'bot', text: data.message[0].answer }))
     },
   })
 
@@ -23,7 +23,11 @@ const ChatBot = () => {
     <>
       <div className='chatbot'>
         <div className='chatbot-header'>
-          <img src='../assets/img/message-bot.png' />
+          <div>
+            <img src='../src/assets/img/robot.svg' />
+            <p className='name'> FredBot</p>
+          </div>
+          <button className='close'><img src='../src/assets/img/close.svg'/></button>
         </div>
         {!token ? (
           <div className='chatbot-notlogin'>
@@ -45,7 +49,7 @@ const ChatBot = () => {
                   return (
                     <div className='message user-message' key={index}>
                       {message.text}
-                    </div> 
+                    </div>
                   )
                 }
               })}
@@ -58,7 +62,7 @@ const ChatBot = () => {
                   let request = form.get('request')?.toString()
                   if (request) {
                     setUserRequest(request)
-                    dispatch(add({origin: 'user', text: request}))
+                    dispatch(add({ origin: 'user', text: request }))
                   }
                 }}
               >

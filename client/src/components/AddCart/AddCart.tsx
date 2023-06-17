@@ -24,7 +24,7 @@ const AddCart = ({productId}:{productId:string}) => {
   })
 
   return (
-    <>
+    <div className="add-cart">
       <input 
         type="number"
         value={quantity}
@@ -34,7 +34,7 @@ const AddCart = ({productId}:{productId:string}) => {
       <button onClick={() => addMutation.mutate()} disabled={addMutation.isLoading}>
         {addMutation.isLoading ? 'Adding to cart...' : 'Add to Cart'}
       </button>
-    </>
+    </div>
   )
 }
 export default AddCart
