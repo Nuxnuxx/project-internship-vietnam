@@ -28,7 +28,17 @@ const ShoppingCart = () => {
             <ShoppingCartItem key={index} {...product} />
           ))}
         </div>
-        <Link className='button-order' to='/order'> Order </Link>
+        {cartItem.length == 0 ? (
+          <Link className='button-order' to='/catalog'>
+            {' '}
+            Go buy something{' '}
+          </Link>
+        ) : (
+          <Link className='button-order' to='/order'>
+            {' '}
+            Order{' '}
+          </Link>
+        )}
       </div>
     </>
   )

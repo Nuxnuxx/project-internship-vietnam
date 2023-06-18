@@ -48,7 +48,7 @@ def query_product(query):
             "match": {
               "title": {
                 "query": query,
-                "boost": 0.2
+                "boost": 0.1
               }
             }
         },
@@ -57,14 +57,14 @@ def query_product(query):
             "k": 4,
             "query_vector": query_vector,
             "num_candidates": 100,
-            "boost": 0.5
+            "boost": 0.6
             },
             {
             "field": "description_vector",
             "k": 4,
             "query_vector": query_vector,
             "num_candidates": 100,
-            "boost": 0.3
+            "boost": 0.2
             }
         ],
         "_source": ["id"]

@@ -12,24 +12,22 @@ const ChatBot = () => {
   const { token } = useAppSelector((state) => state.userToken.value)
   const messages = useAppSelector((state) => state.discussion.value)
 
-  const response = useQuery(['request', userRequest], fetchChatBot, {
+  const {isLoading} = useQuery(['request', userRequest], fetchChatBot, {
     onSuccess: (data) => {
       console.log(data.message[0].answer)
-      dispatch(add({ origin: 'bot', text: data.message[0].answer }))
+      dispatch(add({origin: "bot", text: data.message[0].answer}))
     },
   })
+
+  if (isLoading) {
+    return <div> X </div>
+  }
 
   return (
     <>
       <div className='chatbot'>
         <div className='chatbot-header'>
-          <div>
-            <img src='../src/assets/img/robot.svg' />
-            <p className='name'> FredBot</p>
-          </div>
-          <button className='close'>
-            <img src='../src/assets/img/close.svg' />
-          </button>
+          <img src='../assets/img/message-bot.png' />
         </div>
         {!token ? (
           <div className='chatbot-notlogin'>
@@ -51,7 +49,7 @@ const ChatBot = () => {
                   return (
                     <div className='message user-message' key={index}>
                       {message.text}
-                    </div>
+                    </div> 
                   )
                 }
               })}
@@ -61,24 +59,15 @@ const ChatBot = () => {
                 onSubmit={(event) => {
                   event.preventDefault()
                   const form = new FormData(event.currentTarget)
-                  if (userRequest) {
-                    dispatch(add({ origin: 'user', text: userRequest }))
+                  const request = form.get('request')?.toString()
+                  if (request) {
+                    setUserRequest(request)
+                    dispatch(add({origin: 'user', text: request}))
                   }
-                  setUserRequest('')
                 }}
               >
-                <input
-                  value={userRequest}
-                  name='request'
-                  onChange={(e) => setUserRequest(e.target.value)}
-                  placeholder='ask Fred'
-                />
-                <button>
-                  <img
-                    src='../../../src/assets/img/play.svg'
-                    alt='send-message'
-                  />
-                </button>
+                <input name='request' placeholder='ask Fred' />
+                <button>Click</button>
               </form>
             </div>
           </>
