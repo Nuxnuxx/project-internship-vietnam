@@ -1,8 +1,8 @@
 .header {
   display: flex;
-    background-image: linear-gradient(to right, transparent, $mainColorDarker),
-      linear-gradient(to left, transparent, $mainColorLighter);
-    background-color: $mainColor;
+  background-image: linear-gradient(to right, transparent, $mainColorDarker),
+    linear-gradient(to left, transparent, $mainColorLighter);
+  background-color: $mainColor;
   height: 5rem;
   justify-content: space-around;
   align-items: center;
