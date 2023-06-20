@@ -27,6 +27,10 @@
     .close {
       cursor: pointer;
     }
+    img {
+      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(136deg)
+        brightness(104%) contrast(103%);
+    }
     div {
       display: flex;
       flex-direction: row;
@@ -153,8 +157,9 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-   img {
+  img {
     width: 2.5rem;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(136deg)
+      brightness(104%) contrast(103%);
   }
 }
-

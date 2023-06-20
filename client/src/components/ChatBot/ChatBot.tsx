@@ -8,6 +8,7 @@ import { add } from './chatMessageSlice.ts'
 import Loading from '../Loading/Loading.tsx'
 import CloseIcon from '../../assets/img/close.svg'
 import RobotIcon from '../../assets/img/robot.svg'
+import PlayIcon from '../../assets/img/play.svg'
 
 const ChatBot = () => {
   const dispatch = useDispatch()
@@ -81,7 +82,7 @@ const ChatBot = () => {
                 }}
               >
                 <input name='request' placeholder='ask Fred' />
-                <button>Send</button>
+                <button><img src={PlayIcon}/></button>
               </form>
             </div>
           </>
