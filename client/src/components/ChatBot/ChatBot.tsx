@@ -5,6 +5,7 @@ import { useState } from 'react'
 import fetchChatBot from './fetchChatBot'
 import { useDispatch } from 'react-redux'
 import { add } from './chatMessageSlice.ts'
+import Loading from '../Loading/Loading.tsx'
 
 const ChatBot = () => {
   const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const ChatBot = () => {
   })
 
   if (isLoading) {
-    return <div> X </div>
+    return <Loading/>
   }
 
   return (

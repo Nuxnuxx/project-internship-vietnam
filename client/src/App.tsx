@@ -9,8 +9,10 @@ import MainPage from './pages/MainPage/MainPage'
 import Catalog from './pages/Catalog/Catalog'
 import Detail from './components/Detail/Detail'
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart'
-import Order from './components/Order/Order'
+import Order from './pages/Order/Order'
 import ChatBot from './components/ChatBot/ChatBot'
+import Profile from './pages/Profil/Profile'
+import Admin from './pages/Admin/Admin'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +38,8 @@ const App = () => {
                 <Route path='/details/:id' element={<Detail />} />
                 <Route path='/cart' element={<ShoppingCart />} />
                 <Route path='/order' element={<Order />} />
+                <Route path='/profil' element={<Profile />} />
+                <Route path='/admin' element={<Admin />} />
                 <Route path='/chatbot' element={<ChatBot />} />
               </Routes>
             </QueryClientProvider>

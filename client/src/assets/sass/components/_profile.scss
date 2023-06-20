@@ -1,0 +1,31 @@
+.profil {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2rem;
+  font-size: 1rem;
+
+  div {
+    span {
+      font-weight: bold;
+    }
+  }
+
+  input {
+    width: 17rem;
+    height: 2rem;
+    padding-left: 1rem;
+    border: 1px solid $mainColor;
+    border-radius: 1rem;
+  }
+
+  button {
+    all:unset;
+    cursor: pointer;
+    background-color: $mainColor;
+    border-radius: 2rem;
+    color: white;
+    padding: 0.8rem;
+  }
+}

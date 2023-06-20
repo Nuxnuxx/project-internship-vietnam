@@ -1,0 +1,28 @@
+.admin {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 2rem;
+}
+
+.admin-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 2rem;
+  img {
+    width: 10rem;
+  }
+
+    input {
+      height: 2rem;
+    }
+  button {
+    all:unset;
+    height: 2rem;
+    background-color: $mainColor;
+    color: white;
+    border-radius: 2rem;
+    padding: 1rem;
+  }
+}

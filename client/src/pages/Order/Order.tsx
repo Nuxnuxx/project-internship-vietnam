@@ -5,10 +5,10 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import mutateOrder from './mutateOrder'
 import { useAppSelector } from '../../utils/hooks'
 import { all } from './formOrderDataSlice'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import fetchCart from '../../pages/ShoppingCart/fetchCart'
-import Back from '../Back/Back'
+import Back from '../../components/Back/Back'
 
 const Order = () => {
   const dispatch = useDispatch()
