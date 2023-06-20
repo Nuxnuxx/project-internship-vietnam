@@ -3,6 +3,7 @@ import { useAppSelector } from "../../utils/hooks"
 import fetchUser from "./fetchProfile"
 import Loading from "../../components/Loading/Loading"
 import Header from "../../Header"
+import ChatBot from "../../components/ChatBot/ChatBot"
 
 const Profile = () => {
 
@@ -25,6 +26,7 @@ const Profile = () => {
       <input placeholder="new password"/>
       <button> Replace password </button>
     </div>
+      <ChatBot/>
     </>
   )
 }

@@ -5,6 +5,7 @@ import Header from '../../Header'
 import { useQuery } from '@tanstack/react-query'
 import fetchProductById from '../ShoppingCartItem/fetchProductById'
 import Loading from '../Loading/Loading'
+import ChatBot from '../ChatBot/ChatBot'
 
 const Detail = () => {
   const { id } = useParams()
@@ -36,6 +37,7 @@ const Detail = () => {
           </div>
         ) : null}
       </div>
+      <ChatBot/>
     </>
   )
 }

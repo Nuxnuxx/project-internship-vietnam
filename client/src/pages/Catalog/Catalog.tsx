@@ -1,4 +1,5 @@
 import Header from '../../Header'
+import ChatBot from '../../components/ChatBot/ChatBot'
 import ProductList from '../../components/ProductList/ProductList'
 import SearchBar from '../../components/SearchBar/SearchBar'
 
@@ -10,6 +11,7 @@ const Catalog = () => {
         <SearchBar />
         <ProductList />
       </div>
+      <ChatBot/>
     </>
   )
 }

@@ -12,6 +12,7 @@ import {
 } from '../../utils/verif'
 import { useState } from 'react'
 import { NavigationType, redirect, useNavigate } from 'react-router-dom'
+import ChatBot from '../../components/ChatBot/ChatBot'
 
 const Register = () => {
   const dispatch = useDispatch()
@@ -154,6 +155,7 @@ const Register = () => {
           {registerFailed ? <div> Register Failed </div> : null}
         </form>
       </div>
+      <ChatBot/>
     </>
   )
 }

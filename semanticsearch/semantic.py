@@ -69,19 +69,14 @@ def query_product(query):
         ],
         "_source": ["id"]
     }
-
-
 # Execute the search query
     res = es_client.search(
         index=INDEX_NAME,
         body=search_query,
     )
-
     saucisse = []
-
     for hit in res['hits']['hits']:
         saucisse.append(hit['_source'])
-
     return saucisse
 
 

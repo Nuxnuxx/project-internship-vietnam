@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
 import { Link } from 'react-router-dom'
+import ChatBot from '../../components/ChatBot/ChatBot'
 
 const MainPage = () => {
   return (
@@ -15,6 +16,7 @@ const MainPage = () => {
         </p>
       </Link>
     </div>
+      <ChatBot/>
     </>
   )
 }

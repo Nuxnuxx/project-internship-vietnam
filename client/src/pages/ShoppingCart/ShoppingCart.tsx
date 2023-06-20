@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Header from '../../Header'
 import ShoppingCartItem from '../../components/ShoppingCartItem/ShoppingCartItem'
 import { useEffect } from 'react'
+import ChatBot from '../../components/ChatBot/ChatBot'
 
 const ShoppingCart = () => {
   const { token } = useAppSelector((state) => state.userToken.value)
@@ -40,6 +41,7 @@ const ShoppingCart = () => {
           </Link>
         )}
       </div>
+      <ChatBot/>
     </>
   )
 }

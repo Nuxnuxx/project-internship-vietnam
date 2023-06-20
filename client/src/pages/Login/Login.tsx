@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { set } from '../../redux/userTokenSlice'
 import { useState } from 'react'
 import { isValidEmail, isValidPassword } from '../../utils/verif'
+import ChatBot from '../../components/ChatBot/ChatBot'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -111,6 +112,7 @@ const Login = () => {
         <p>Not Registered ?</p>
         <Link to='/register'>Click Here</Link>
       </div>
+      <ChatBot/>
     </>
   )
 }

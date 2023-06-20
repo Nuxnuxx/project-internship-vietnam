@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import fetchCart from '../../pages/ShoppingCart/fetchCart'
 import Back from '../../components/Back/Back'
+import ChatBot from '../../components/ChatBot/ChatBot'
 
 const Order = () => {
   const dispatch = useDispatch()
@@ -164,6 +165,7 @@ const Order = () => {
           </PayPalScriptProvider>
         </form>
       </div>
+      <ChatBot/>
     </>
   )
 }

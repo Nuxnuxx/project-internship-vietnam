@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { all } from '../ProductList/productDataSlice'
 import fetchProductsBySemantic from './FetchProductsBySemantic'
 import SemanticSearchCard from '../SemanticSearchCard/SemanticSearchCard'
+import ChatBot from '../ChatBot/ChatBot'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
@@ -93,6 +94,7 @@ const SearchBar = () => {
             })}
         </div>
       </div>
+      <ChatBot/>
     </div>
   )
 }
